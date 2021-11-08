@@ -10,6 +10,11 @@
       "StackName": "amplify-sharedventure-dev-151735",
       "StackId": "arn:aws:cloudformation:eu-central-1:241301255123:stack/amplify-sharedventure-dev-151735/a09cbe00-409e-11ec-9ccb-02fccf31d618",
       "AmplifyAppId": "d2j74bekyh8nlb"
+    },
+    "categories": {
+      "auth": {
+        "sharedventuread3cdc8b": {}
+      }
     }
   }
 }
