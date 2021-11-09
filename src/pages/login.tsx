@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import React, { useRef } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 
 import {
@@ -18,42 +18,33 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Auth } from "aws-amplify";
-import { CognitoUser } from "@aws-amplify/auth";
 import { toastPosition } from "../config/constants";
 
 type IFormInput = {
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
-export default function Signup() {
+export default function Login() {
   const toast = useToast();
   const router = useRouter();
   const {
     handleSubmit,
     register,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
 
-  const password = useRef({});
-  password.current = watch("password", "");
-
   async function onSubmit(values: IFormInput) {
     try {
-      await signUpWithEmailAndPassword(values);
+      await signInWithEmailAndPassword(values);
       toast({
-        title: "Account created.",
+        title: "Successfully signed in.",
         description: "We've created your account for you.",
         status: "success",
         duration: 9000,
         isClosable: true,
         position: toastPosition,
       });
-      if (router.pathname == "/signup") {
-        router.push(`/confirm?email=${values.email}`);
-      }
     } catch (error) {
       toast({
         title: "Failure.",
@@ -66,19 +57,18 @@ export default function Signup() {
     }
   }
 
-  async function signUpWithEmailAndPassword(
-    data: IFormInput
-  ): Promise<CognitoUser> {
+  async function signInWithEmailAndPassword(data: IFormInput) {
     const { email, password } = data;
     try {
-      const { user } = await Auth.signUp({
+      const amplifyUser = await Auth.signIn({
         username: email,
         password: password,
-        attributes: {
-          email: email,
-        },
       });
-      return user;
+      if (amplifyUser) {
+        router.push("/");
+      } else {
+        throw new Error("Something went wrong.");
+      }
     } catch (error) {
       throw error;
     }
@@ -93,7 +83,7 @@ export default function Signup() {
     >
       <Stack spacing={8} mx={"auto"} minW={["100%", 500]} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Signup your account</Heading>
+          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
           </Text>
@@ -146,35 +136,13 @@ export default function Signup() {
                   {errors.password && errors.password.message}
                 </FormErrorMessage>
               </FormControl>
-              <FormControl
-                isInvalid={Boolean(errors.confirmPassword)}
-                isRequired
-              >
-                <FormLabel id="confirmPassword" htmlFor="confirmPassword">
-                  Repeat Password
-                </FormLabel>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Repeat Password"
-                  {...register("confirmPassword", {
-                    required: "This is required",
-                    validate: (value) =>
-                      value === password.current ||
-                      "The passwords do not match",
-                  })}
-                />
-                <FormErrorMessage>
-                  {errors.confirmPassword && errors.confirmPassword.message}
-                </FormErrorMessage>
-              </FormControl>
               <Button
                 mt={4}
                 colorScheme="teal"
                 isLoading={isSubmitting}
                 type="submit"
               >
-                Signup
+                Submit
               </Button>
             </Stack>
           </form>
