@@ -2,6 +2,72 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getEvent = /* GraphQL */ `
+  query GetEvent($id: ID!) {
+    getEvent(id: $id) {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listEvents = /* GraphQL */ `
+  query ListEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        price
+        cityID
+        images
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getCity = /* GraphQL */ `
+  query GetCity($id: ID!) {
+    getCity(id: $id) {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCitys = /* GraphQL */ `
+  query ListCitys(
+    $filter: ModelCityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
 export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {

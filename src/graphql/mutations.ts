@@ -2,6 +2,102 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createEvent = /* GraphQL */ `
+  mutation CreateEvent(
+    $input: CreateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    createEvent(input: $input, condition: $condition) {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateEvent = /* GraphQL */ `
+  mutation UpdateEvent(
+    $input: UpdateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    updateEvent(input: $input, condition: $condition) {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteEvent = /* GraphQL */ `
+  mutation DeleteEvent(
+    $input: DeleteEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    deleteEvent(input: $input, condition: $condition) {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createCity = /* GraphQL */ `
+  mutation CreateCity(
+    $input: CreateCityInput!
+    $condition: ModelCityConditionInput
+  ) {
+    createCity(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCity = /* GraphQL */ `
+  mutation UpdateCity(
+    $input: UpdateCityInput!
+    $condition: ModelCityConditionInput
+  ) {
+    updateCity(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCity = /* GraphQL */ `
+  mutation DeleteCity(
+    $input: DeleteCityInput!
+    $condition: ModelCityConditionInput
+  ) {
+    deleteCity(input: $input, condition: $condition) {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createPost = /* GraphQL */ `
   mutation CreatePost(
     $input: CreatePostInput!

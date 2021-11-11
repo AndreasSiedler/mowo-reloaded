@@ -2,6 +2,84 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateEvent = /* GraphQL */ `
+  subscription OnCreateEvent {
+    onCreateEvent {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateEvent = /* GraphQL */ `
+  subscription OnUpdateEvent {
+    onUpdateEvent {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteEvent = /* GraphQL */ `
+  subscription OnDeleteEvent {
+    onDeleteEvent {
+      id
+      title
+      description
+      price
+      cityID
+      images
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateCity = /* GraphQL */ `
+  subscription OnCreateCity {
+    onCreateCity {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCity = /* GraphQL */ `
+  subscription OnUpdateCity {
+    onUpdateCity {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCity = /* GraphQL */ `
+  subscription OnDeleteCity {
+    onDeleteCity {
+      id
+      title
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost {
     onCreatePost {
