@@ -2,40 +2,94 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getEvent = /* GraphQL */ `
-  query GetEvent($id: ID!) {
-    getEvent(id: $id) {
+export const getProduct = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
       id
       title
-      description
-      price
-      cityID
-      images
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      owner
-    }
-  }
-`;
-export const listEvents = /* GraphQL */ `
-  query ListEvents(
-    $filter: ModelEventFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
+      city {
         id
         title
-        description
-        price
-        cityID
-        images
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+    }
+  }
+`;
+export const listProducts = /* GraphQL */ `
+  query ListProducts(
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        city {
+          id
+          title
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+      }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncProducts = /* GraphQL */ `
+  query SyncProducts(
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProducts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        city {
+          id
+          title
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -44,6 +98,9 @@ export const getCity = /* GraphQL */ `
     getCity(id: $id) {
       id
       title
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -60,102 +117,43 @@ export const listCitys = /* GraphQL */ `
       items {
         id
         title
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
+      startedAt
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
-      id
-      title
-      createdAt
-      updatedAt
-      owner
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
+export const syncCities = /* GraphQL */ `
+  query SyncCities(
+    $filter: ModelCityFilterInput
     $limit: Int
     $nextToken: String
+    $lastSync: AWSTimestamp
   ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    syncCities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         title
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        owner
-        comments {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      postID
-      content
-      createdAt
-      updatedAt
-      post {
-        id
-        title
-        createdAt
-        updatedAt
-        owner
-        comments {
-          nextToken
-        }
-      }
-      owner
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        postID
-        content
-        createdAt
-        updatedAt
-        post {
-          id
-          title
-          createdAt
-          updatedAt
-          owner
-        }
         owner
       }
       nextToken
+      startedAt
     }
   }
 `;

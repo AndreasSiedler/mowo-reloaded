@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import NextLink from "next/link";
 import {
   IconButton,
   Box,
@@ -30,6 +31,7 @@ import { IconType } from "react-icons";
 import { ReactText } from "react";
 import ProfileButton from "../components/ProfileButton";
 import { useUser } from "../context/AuthContext";
+import { GetStaticProps } from "next";
 
 interface LinkItemProps {
   name: string;
@@ -97,9 +99,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        <NextLink href="/">
+          <a>
+            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+              Logo
+            </Text>
+          </a>
+        </NextLink>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -177,7 +183,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         fontFamily="monospace"
         fontWeight="bold"
       >
-        Logo
+        LogoMobile
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
@@ -188,4 +194,12 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </HStack>
     </Flex>
   );
+};
+
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {
+      hideHeader: true,
+    },
+  };
 };

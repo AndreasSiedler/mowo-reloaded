@@ -2,24 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateEventInput = {
+export type CreateProductInput = {
   id?: string | null,
-  title: string,
-  description?: string | null,
-  price?: number | null,
-  cityID: string,
-  images?: Array< string | null > | null,
+  title?: string | null,
+  _version?: number | null,
+  productCityId?: string | null,
 };
 
-export type ModelEventConditionInput = {
+export type ModelProductConditionInput = {
   title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  price?: ModelIntInput | null,
-  cityID?: ModelIDInput | null,
-  images?: ModelStringInput | null,
-  and?: Array< ModelEventConditionInput | null > | null,
-  or?: Array< ModelEventConditionInput | null > | null,
-  not?: ModelEventConditionInput | null,
+  and?: Array< ModelProductConditionInput | null > | null,
+  or?: Array< ModelProductConditionInput | null > | null,
+  not?: ModelProductConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -62,16 +56,72 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+export type Product = {
+  __typename: "Product",
+  id: string,
+  title?: string | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+  city?: City | null,
+};
+
+export type City = {
+  __typename: "City",
+  id: string,
+  title: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateProductInput = {
+  id: string,
+  title?: string | null,
+  _version?: number | null,
+  productCityId?: string | null,
+};
+
+export type DeleteProductInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateCityInput = {
+  id?: string | null,
+  title: string,
+  _version?: number | null,
+};
+
+export type ModelCityConditionInput = {
+  title?: ModelStringInput | null,
+  and?: Array< ModelCityConditionInput | null > | null,
+  or?: Array< ModelCityConditionInput | null > | null,
+  not?: ModelCityConditionInput | null,
+};
+
+export type UpdateCityInput = {
+  id: string,
+  title?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteCityInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type ModelProductFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  and?: Array< ModelProductFilterInput | null > | null,
+  or?: Array< ModelProductFilterInput | null > | null,
+  not?: ModelProductFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -90,150 +140,11 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type Event = {
-  __typename: "Event",
-  id: string,
-  title: string,
-  description?: string | null,
-  price?: number | null,
-  cityID: string,
-  images?: Array< string | null > | null,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type UpdateEventInput = {
-  id: string,
-  title?: string | null,
-  description?: string | null,
-  price?: number | null,
-  cityID?: string | null,
-  images?: Array< string | null > | null,
-};
-
-export type DeleteEventInput = {
-  id: string,
-};
-
-export type CreateCityInput = {
-  id?: string | null,
-  title: string,
-};
-
-export type ModelCityConditionInput = {
-  title?: ModelStringInput | null,
-  and?: Array< ModelCityConditionInput | null > | null,
-  or?: Array< ModelCityConditionInput | null > | null,
-  not?: ModelCityConditionInput | null,
-};
-
-export type City = {
-  __typename: "City",
-  id: string,
-  title: string,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type UpdateCityInput = {
-  id: string,
-  title?: string | null,
-};
-
-export type DeleteCityInput = {
-  id: string,
-};
-
-export type CreatePostInput = {
-  id?: string | null,
-  title: string,
-};
-
-export type ModelPostConditionInput = {
-  title?: ModelStringInput | null,
-  and?: Array< ModelPostConditionInput | null > | null,
-  or?: Array< ModelPostConditionInput | null > | null,
-  not?: ModelPostConditionInput | null,
-};
-
-export type Post = {
-  __typename: "Post",
-  id: string,
-  title: string,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-  comments?: ModelCommentConnection | null,
-};
-
-export type ModelCommentConnection = {
-  __typename: "ModelCommentConnection",
-  items?:  Array<Comment | null > | null,
+export type ModelProductConnection = {
+  __typename: "ModelProductConnection",
+  items:  Array<Product >,
   nextToken?: string | null,
-};
-
-export type Comment = {
-  __typename: "Comment",
-  id: string,
-  postID: string,
-  content: string,
-  createdAt: string,
-  updatedAt: string,
-  post?: Post | null,
-  owner?: string | null,
-};
-
-export type UpdatePostInput = {
-  id: string,
-  title?: string | null,
-};
-
-export type DeletePostInput = {
-  id: string,
-};
-
-export type CreateCommentInput = {
-  id?: string | null,
-  postID: string,
-  content: string,
-};
-
-export type ModelCommentConditionInput = {
-  postID?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentConditionInput | null > | null,
-  or?: Array< ModelCommentConditionInput | null > | null,
-  not?: ModelCommentConditionInput | null,
-};
-
-export type UpdateCommentInput = {
-  id: string,
-  postID?: string | null,
-  content?: string | null,
-};
-
-export type DeleteCommentInput = {
-  id: string,
-};
-
-export type ModelEventFilterInput = {
-  id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  price?: ModelIntInput | null,
-  cityID?: ModelIDInput | null,
-  images?: ModelStringInput | null,
-  and?: Array< ModelEventFilterInput | null > | null,
-  or?: Array< ModelEventFilterInput | null > | null,
-  not?: ModelEventFilterInput | null,
-};
-
-export type ModelEventConnection = {
-  __typename: "ModelEventConnection",
-  items?:  Array<Event | null > | null,
-  nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelCityFilterInput = {
@@ -246,90 +157,95 @@ export type ModelCityFilterInput = {
 
 export type ModelCityConnection = {
   __typename: "ModelCityConnection",
-  items?:  Array<City | null > | null,
+  items:  Array<City >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
-export type ModelPostFilterInput = {
-  id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  and?: Array< ModelPostFilterInput | null > | null,
-  or?: Array< ModelPostFilterInput | null > | null,
-  not?: ModelPostFilterInput | null,
+export type CreateProductMutationVariables = {
+  input: CreateProductInput,
+  condition?: ModelProductConditionInput | null,
 };
 
-export type ModelPostConnection = {
-  __typename: "ModelPostConnection",
-  items?:  Array<Post | null > | null,
-  nextToken?: string | null,
-};
-
-export type ModelCommentFilterInput = {
-  id?: ModelIDInput | null,
-  postID?: ModelIDInput | null,
-  content?: ModelStringInput | null,
-  and?: Array< ModelCommentFilterInput | null > | null,
-  or?: Array< ModelCommentFilterInput | null > | null,
-  not?: ModelCommentFilterInput | null,
-};
-
-export type CreateEventMutationVariables = {
-  input: CreateEventInput,
-  condition?: ModelEventConditionInput | null,
-};
-
-export type CreateEventMutation = {
-  createEvent?:  {
-    __typename: "Event",
+export type CreateProductMutation = {
+  createProduct?:  {
+    __typename: "Product",
     id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
   } | null,
 };
 
-export type UpdateEventMutationVariables = {
-  input: UpdateEventInput,
-  condition?: ModelEventConditionInput | null,
+export type UpdateProductMutationVariables = {
+  input: UpdateProductInput,
+  condition?: ModelProductConditionInput | null,
 };
 
-export type UpdateEventMutation = {
-  updateEvent?:  {
-    __typename: "Event",
+export type UpdateProductMutation = {
+  updateProduct?:  {
+    __typename: "Product",
     id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
   } | null,
 };
 
-export type DeleteEventMutationVariables = {
-  input: DeleteEventInput,
-  condition?: ModelEventConditionInput | null,
+export type DeleteProductMutationVariables = {
+  input: DeleteProductInput,
+  condition?: ModelProductConditionInput | null,
 };
 
-export type DeleteEventMutation = {
-  deleteEvent?:  {
-    __typename: "Event",
+export type DeleteProductMutation = {
+  deleteProduct?:  {
+    __typename: "Product",
     id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
   } | null,
 };
 
@@ -343,6 +259,9 @@ export type CreateCityMutation = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -359,6 +278,9 @@ export type UpdateCityMutation = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -375,227 +297,111 @@ export type DeleteCityMutation = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
   } | null,
 };
 
-export type CreatePostMutationVariables = {
-  input: CreatePostInput,
-  condition?: ModelPostConditionInput | null,
-};
-
-export type CreatePostMutation = {
-  createPost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type UpdatePostMutationVariables = {
-  input: UpdatePostInput,
-  condition?: ModelPostConditionInput | null,
-};
-
-export type UpdatePostMutation = {
-  updatePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type DeletePostMutationVariables = {
-  input: DeletePostInput,
-  condition?: ModelPostConditionInput | null,
-};
-
-export type DeletePostMutation = {
-  deletePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type CreateCommentMutationVariables = {
-  input: CreateCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type CreateCommentMutation = {
-  createComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type UpdateCommentMutationVariables = {
-  input: UpdateCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type UpdateCommentMutation = {
-  updateComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeleteCommentMutationVariables = {
-  input: DeleteCommentInput,
-  condition?: ModelCommentConditionInput | null,
-};
-
-export type DeleteCommentMutation = {
-  deleteComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type GetEventQueryVariables = {
+export type GetProductQueryVariables = {
   id: string,
 };
 
-export type GetEventQuery = {
-  getEvent?:  {
-    __typename: "Event",
+export type GetProductQuery = {
+  getProduct?:  {
+    __typename: "Product",
     id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
   } | null,
 };
 
-export type ListEventsQueryVariables = {
-  filter?: ModelEventFilterInput | null,
+export type ListProductsQueryVariables = {
+  filter?: ModelProductFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListEventsQuery = {
-  listEvents?:  {
-    __typename: "ModelEventConnection",
-    items?:  Array< {
-      __typename: "Event",
+export type ListProductsQuery = {
+  listProducts?:  {
+    __typename: "ModelProductConnection",
+    items:  Array< {
+      __typename: "Product",
       id: string,
-      title: string,
-      description?: string | null,
-      price?: number | null,
-      cityID: string,
-      images?: Array< string | null > | null,
+      title?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
+      city?:  {
+        __typename: "City",
+        id: string,
+        title: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
+    } >,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncProductsQueryVariables = {
+  filter?: ModelProductFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncProductsQuery = {
+  syncProducts?:  {
+    __typename: "ModelProductConnection",
+    items:  Array< {
+      __typename: "Product",
+      id: string,
+      title?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      city?:  {
+        __typename: "City",
+        id: string,
+        title: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
+    } >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -608,6 +414,9 @@ export type GetCityQuery = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -623,171 +432,117 @@ export type ListCitysQueryVariables = {
 export type ListCitysQuery = {
   listCitys?:  {
     __typename: "ModelCityConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "City",
       id: string,
       title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type GetPostQueryVariables = {
-  id: string,
+export type SyncCitiesQueryVariables = {
+  filter?: ModelCityFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
 };
 
-export type GetPostQuery = {
-  getPost?:  {
-    __typename: "Post",
+export type SyncCitiesQuery = {
+  syncCities?:  {
+    __typename: "ModelCityConnection",
+    items:  Array< {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } >,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateProductSubscription = {
+  onCreateProduct?:  {
+    __typename: "Product",
     id: string,
-    title: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
     } | null,
   } | null,
 };
 
-export type ListPostsQueryVariables = {
-  filter?: ModelPostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPostsQuery = {
-  listPosts?:  {
-    __typename: "ModelPostConnection",
-    items?:  Array< {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetCommentQueryVariables = {
-  id: string,
-};
-
-export type GetCommentQuery = {
-  getComment?:  {
-    __typename: "Comment",
+export type OnUpdateProductSubscription = {
+  onUpdateProduct?:  {
+    __typename: "Product",
     id: string,
-    postID: string,
-    content: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    post?:  {
-      __typename: "Post",
+    city?:  {
+      __typename: "City",
       id: string,
       title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
     } | null,
-    owner?: string | null,
   } | null,
 };
 
-export type ListCommentsQueryVariables = {
-  filter?: ModelCommentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCommentsQuery = {
-  listComments?:  {
-    __typename: "ModelCommentConnection",
-    items?:  Array< {
-      __typename: "Comment",
+export type OnDeleteProductSubscription = {
+  onDeleteProduct?:  {
+    __typename: "Product",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    city?:  {
+      __typename: "City",
       id: string,
-      postID: string,
-      content: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-      post?:  {
-        __typename: "Post",
-        id: string,
-        title: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
       owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type OnCreateEventSubscription = {
-  onCreateEvent?:  {
-    __typename: "Event",
-    id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateEventSubscription = {
-  onUpdateEvent?:  {
-    __typename: "Event",
-    id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteEventSubscription = {
-  onDeleteEvent?:  {
-    __typename: "Event",
-    id: string,
-    title: string,
-    description?: string | null,
-    price?: number | null,
-    cityID: string,
-    images?: Array< string | null > | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
+    } | null,
   } | null,
 };
 
@@ -796,6 +551,9 @@ export type OnCreateCitySubscription = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -807,6 +565,9 @@ export type OnUpdateCitySubscription = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -818,152 +579,11 @@ export type OnDeleteCitySubscription = {
     __typename: "City",
     id: string,
     title: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreatePostSubscription = {
-  onCreatePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnUpdatePostSubscription = {
-  onUpdatePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnDeletePostSubscription = {
-  onDeletePost?:  {
-    __typename: "Post",
-    id: string,
-    title: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    comments?:  {
-      __typename: "ModelCommentConnection",
-      items?:  Array< {
-        __typename: "Comment",
-        id: string,
-        postID: string,
-        content: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnCreateCommentSubscription = {
-  onCreateComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateCommentSubscription = {
-  onUpdateComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteCommentSubscription = {
-  onDeleteComment?:  {
-    __typename: "Comment",
-    id: string,
-    postID: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      title: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      comments?:  {
-        __typename: "ModelCommentConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
     owner?: string | null,
   } | null,
 };
