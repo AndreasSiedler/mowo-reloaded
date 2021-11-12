@@ -17,6 +17,7 @@ import {
   FlexProps,
   Center,
   Spinner,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -29,20 +30,21 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import ProfileButton from "../components/ProfileButton";
+import ProfileButton from "./ProfileButton";
 import { useUser } from "../context/AuthContext";
-import { GetStaticProps } from "next";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 interface LinkItemProps {
   name: string;
+  href: string;
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
+  { name: "Home", href: "/dashboard", icon: FiHome },
+  { name: "Spaces", href: "/dashboard/spaces", icon: FiTrendingUp },
+  { name: "Explore", href: "/", icon: FiCompass },
+  { name: "Favourites", href: "/", icon: FiStar },
+  { name: "Settings", href: "/", icon: FiSettings },
 ];
 
 export default function SidebarWithHeader({ children }: { children: ReactNode }) {
@@ -109,9 +111,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
+        <NextLink key={link.name} href={link.href}>
+          <NavItem icon={link.icon}>{link.name}</NavItem>
+        </NextLink>
       ))}
     </Box>
   );
@@ -157,6 +159,8 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -187,6 +191,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
+        <IconButton
+          onClick={toggleColorMode}
+          size="lg"
+          variant="ghost"
+          aria-label="open menu"
+          icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+        />
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
         <Flex alignItems={"center"}>
           <ProfileButton />
@@ -194,12 +205,4 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </HStack>
     </Flex>
   );
-};
-
-export const getStaticProps: GetStaticProps = () => {
-  return {
-    props: {
-      hideHeader: true,
-    },
-  };
 };

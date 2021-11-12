@@ -1,0 +1,60 @@
+[
+  {
+    "title": "Basic information",
+    "subtitle": "Add a new listing",
+    "formBlocks": [
+      {
+        "title": "Basic Sprinter",
+        "content": "His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.",
+        "inputs": [
+          {
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "validation": {
+              "required": "This is required",
+              "minLength": {
+                "value": 6,
+                "message": "Minimum length should be 4"
+              }
+            }
+          },
+          {
+            "label": "Category",
+            "name": "category",
+            "type": "text",
+            "validation": {
+              "required": "This is required",
+              "minLength": {
+                "value": 6,
+                "message": "Minimum length should be 4"
+              }
+            }
+          },
+          {
+            "label": "Themen",
+            "name": "category",
+            "type": "multiselect",
+            "text": "One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections",
+            "asyncUrl": "/api/v1/products/category/"
+          },
+          {
+            "label": "Is your property set as a dedicated guest space?",
+            "name": "basics.guests",
+            "type": "radios",
+            "radios": [
+              {
+                "label": "Yes, it's primarily set up for guests",
+                "value": "guests_0"
+              },
+              {
+                "label": "No, I keep my personal belongings there",
+                "value": "guests_1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
