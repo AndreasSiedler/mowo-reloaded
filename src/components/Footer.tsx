@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 import { Box, Container, Link, SimpleGrid, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 
@@ -25,7 +25,11 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default function LargeWithLogoLeft() {
+/**
+ * Renders a large footer with left logo
+ * @return {ReactElement}
+ */
+export default function Footer(): ReactElement {
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}

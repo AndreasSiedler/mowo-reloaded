@@ -12,6 +12,7 @@ export const onCreateProduct = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       city {
         id
         title
@@ -35,6 +36,7 @@ export const onUpdateProduct = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       city {
         id
         title
@@ -58,6 +60,7 @@ export const onDeleteProduct = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       city {
         id
         title

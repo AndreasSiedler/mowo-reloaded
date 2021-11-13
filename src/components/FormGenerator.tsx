@@ -1,26 +1,39 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Button } from "@chakra-ui/react";
+import { Button, Container } from "@chakra-ui/react";
 import FormFieldsGenerator from "./FormFieldsGenerator";
-import React from "react";
+import React, { ReactElement, useEffect } from "react";
 
 type FormGeneratorProps = {
-  formData: any;
+  formData: Record<string, any>;
+  defaults: Record<string, any>;
+  onSubmit: (data) => void;
 };
 
-export default function FormGenerator(props: FormGeneratorProps) {
-  const { formData } = props;
-
+/**
+ * Renders a dynamic created form
+ * @param {Record<string, any>} formData
+ * @param {Record<string, any>} defaults
+ * @return {ReactElement}
+ */
+export default function FormGenerator({
+  formData,
+  defaults,
+  onSubmit,
+}: FormGeneratorProps): ReactElement {
   const methods = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  // Reset form values with default values
+  useEffect(() => {
+    methods.reset(defaults);
+  }, []);
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-        <FormFieldsGenerator data={formData} />
-        <Button type="submit">Speichern</Button>
-      </form>
-    </FormProvider>
+    <Container maxW="container.xl">
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
+          <FormFieldsGenerator data={formData} />
+          <Button type="submit">Speichern</Button>
+        </form>
+      </FormProvider>
+    </Container>
   );
 }

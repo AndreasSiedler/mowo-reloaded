@@ -12,6 +12,7 @@ export const getProduct = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
+      owner
       city {
         id
         title
@@ -40,6 +41,7 @@ export const listProducts = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+        owner
         city {
           id
           title
@@ -77,6 +79,7 @@ export const syncProducts = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+        owner
         city {
           id
           title

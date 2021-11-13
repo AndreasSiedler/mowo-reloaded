@@ -16,7 +16,11 @@ import {
 import { FiChevronDown } from "react-icons/fi";
 import { Auth } from "aws-amplify";
 
-export default function ProfileButton({}): ReactElement {
+/**
+ * Renders a Profile button with dropdown menu
+ * @return {ReactElement}
+ */
+export default function ProfileButton(): ReactElement {
   return (
     <Menu>
       <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: "none" }}>

@@ -15,20 +15,43 @@
               "required": "This is required",
               "minLength": {
                 "value": 6,
-                "message": "Minimum length should be 4"
+                "message": "Minimum length should be 6"
+              }
+            }
+          },
+          {
+            "label": "Description",
+            "name": "description",
+            "type": "textarea",
+            "validation": {
+              "required": "This is required",
+              "minLength": {
+                "value": 5,
+                "message": "Minimum length should be 5"
               }
             }
           },
           {
             "label": "Category",
             "name": "category",
-            "type": "text",
-            "validation": {
-              "required": "This is required",
-              "minLength": {
-                "value": 6,
-                "message": "Minimum length should be 4"
+            "type": "select",
+            "placeholder": "Select one option",
+            "options": [
+              {
+                "label": "Entire place 2",
+                "value": "type_0"
+              },
+              {
+                "label": "Private room 2",
+                "value": "type_1"
+              },
+              {
+                "label": "Shared room 2",
+                "value": "type_2"
               }
+            ],
+            "validation": {
+              "required": "This is required"
             }
           },
           {

@@ -65,6 +65,7 @@ export type Product = {
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
   city?: City | null,
 };
 
@@ -142,7 +143,7 @@ export type ModelIDInput = {
 
 export type ModelProductConnection = {
   __typename: "ModelProductConnection",
-  items:  Array<Product >,
+  items?:  Array<Product | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -157,7 +158,7 @@ export type ModelCityFilterInput = {
 
 export type ModelCityConnection = {
   __typename: "ModelCityConnection",
-  items:  Array<City >,
+  items?:  Array<City | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -177,6 +178,7 @@ export type CreateProductMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -206,6 +208,7 @@ export type UpdateProductMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -235,6 +238,7 @@ export type DeleteProductMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -320,6 +324,7 @@ export type GetProductQuery = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -343,7 +348,7 @@ export type ListProductsQueryVariables = {
 export type ListProductsQuery = {
   listProducts?:  {
     __typename: "ModelProductConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Product",
       id: string,
       title?: string | null,
@@ -352,6 +357,7 @@ export type ListProductsQuery = {
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
       city?:  {
         __typename: "City",
         id: string,
@@ -363,7 +369,7 @@ export type ListProductsQuery = {
         updatedAt: string,
         owner?: string | null,
       } | null,
-    } >,
+    } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -379,7 +385,7 @@ export type SyncProductsQueryVariables = {
 export type SyncProductsQuery = {
   syncProducts?:  {
     __typename: "ModelProductConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "Product",
       id: string,
       title?: string | null,
@@ -388,6 +394,7 @@ export type SyncProductsQuery = {
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
       city?:  {
         __typename: "City",
         id: string,
@@ -399,7 +406,7 @@ export type SyncProductsQuery = {
         updatedAt: string,
         owner?: string | null,
       } | null,
-    } >,
+    } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -432,7 +439,7 @@ export type ListCitysQueryVariables = {
 export type ListCitysQuery = {
   listCitys?:  {
     __typename: "ModelCityConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "City",
       id: string,
       title: string,
@@ -442,7 +449,7 @@ export type ListCitysQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -458,7 +465,7 @@ export type SyncCitiesQueryVariables = {
 export type SyncCitiesQuery = {
   syncCities?:  {
     __typename: "ModelCityConnection",
-    items:  Array< {
+    items?:  Array< {
       __typename: "City",
       id: string,
       title: string,
@@ -468,7 +475,7 @@ export type SyncCitiesQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -484,6 +491,7 @@ export type OnCreateProductSubscription = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -508,6 +516,7 @@ export type OnUpdateProductSubscription = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
@@ -532,6 +541,7 @@ export type OnDeleteProductSubscription = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
     city?:  {
       __typename: "City",
       id: string,
