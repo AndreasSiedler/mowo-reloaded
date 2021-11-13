@@ -12,6 +12,20 @@ type Product
   city: City @connection
 }
 
+type Space
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, update, delete, read] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  city: City @connection
+}
+
 type City
   @model
   @auth(

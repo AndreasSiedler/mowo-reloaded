@@ -93,6 +93,45 @@ export type DeleteProductInput = {
   _version?: number | null,
 };
 
+export type CreateSpaceInput = {
+  id?: string | null,
+  title?: string | null,
+  _version?: number | null,
+  spaceCityId?: string | null,
+};
+
+export type ModelSpaceConditionInput = {
+  title?: ModelStringInput | null,
+  and?: Array< ModelSpaceConditionInput | null > | null,
+  or?: Array< ModelSpaceConditionInput | null > | null,
+  not?: ModelSpaceConditionInput | null,
+};
+
+export type Space = {
+  __typename: "Space",
+  id: string,
+  title?: string | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+  city?: City | null,
+};
+
+export type UpdateSpaceInput = {
+  id: string,
+  title?: string | null,
+  _version?: number | null,
+  spaceCityId?: string | null,
+};
+
+export type DeleteSpaceInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreateCityInput = {
   id?: string | null,
   title: string,
@@ -144,6 +183,21 @@ export type ModelIDInput = {
 export type ModelProductConnection = {
   __typename: "ModelProductConnection",
   items?:  Array<Product | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelSpaceFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  and?: Array< ModelSpaceFilterInput | null > | null,
+  or?: Array< ModelSpaceFilterInput | null > | null,
+  not?: ModelSpaceFilterInput | null,
+};
+
+export type ModelSpaceConnection = {
+  __typename: "ModelSpaceConnection",
+  items?:  Array<Space | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -231,6 +285,96 @@ export type DeleteProductMutationVariables = {
 export type DeleteProductMutation = {
   deleteProduct?:  {
     __typename: "Product",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type CreateSpaceMutationVariables = {
+  input: CreateSpaceInput,
+  condition?: ModelSpaceConditionInput | null,
+};
+
+export type CreateSpaceMutation = {
+  createSpace?:  {
+    __typename: "Space",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type UpdateSpaceMutationVariables = {
+  input: UpdateSpaceInput,
+  condition?: ModelSpaceConditionInput | null,
+};
+
+export type UpdateSpaceMutation = {
+  updateSpace?:  {
+    __typename: "Space",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type DeleteSpaceMutationVariables = {
+  input: DeleteSpaceInput,
+  condition?: ModelSpaceConditionInput | null,
+};
+
+export type DeleteSpaceMutation = {
+  deleteSpace?:  {
+    __typename: "Space",
     id: string,
     title?: string | null,
     _version: number,
@@ -412,6 +556,108 @@ export type SyncProductsQuery = {
   } | null,
 };
 
+export type GetSpaceQueryVariables = {
+  id: string,
+};
+
+export type GetSpaceQuery = {
+  getSpace?:  {
+    __typename: "Space",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type ListSpacesQueryVariables = {
+  filter?: ModelSpaceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSpacesQuery = {
+  listSpaces?:  {
+    __typename: "ModelSpaceConnection",
+    items?:  Array< {
+      __typename: "Space",
+      id: string,
+      title?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+      city?:  {
+        __typename: "City",
+        id: string,
+        title: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncSpacesQueryVariables = {
+  filter?: ModelSpaceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSpacesQuery = {
+  syncSpaces?:  {
+    __typename: "ModelSpaceConnection",
+    items?:  Array< {
+      __typename: "Space",
+      id: string,
+      title?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+      city?:  {
+        __typename: "City",
+        id: string,
+        title: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type GetCityQueryVariables = {
   id: string,
 };
@@ -534,6 +780,81 @@ export type OnUpdateProductSubscription = {
 export type OnDeleteProductSubscription = {
   onDeleteProduct?:  {
     __typename: "Product",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type OnCreateSpaceSubscription = {
+  onCreateSpace?:  {
+    __typename: "Space",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type OnUpdateSpaceSubscription = {
+  onUpdateSpace?:  {
+    __typename: "Space",
+    id: string,
+    title?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    city?:  {
+      __typename: "City",
+      id: string,
+      title: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteSpaceSubscription = {
+  onDeleteSpace?:  {
+    __typename: "Space",
     id: string,
     title?: string | null,
     _version: number,

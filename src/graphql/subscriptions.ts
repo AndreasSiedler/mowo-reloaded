@@ -74,6 +74,78 @@ export const onDeleteProduct = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSpace = /* GraphQL */ `
+  subscription OnCreateSpace {
+    onCreateSpace {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const onUpdateSpace = /* GraphQL */ `
+  subscription OnUpdateSpace {
+    onUpdateSpace {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const onDeleteSpace = /* GraphQL */ `
+  subscription OnDeleteSpace {
+    onDeleteSpace {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
 export const onCreateCity = /* GraphQL */ `
   subscription OnCreateCity {
     onCreateCity {

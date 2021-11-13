@@ -96,6 +96,100 @@ export const syncProducts = /* GraphQL */ `
     }
   }
 `;
+export const getSpace = /* GraphQL */ `
+  query GetSpace($id: ID!) {
+    getSpace(id: $id) {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const listSpaces = /* GraphQL */ `
+  query ListSpaces(
+    $filter: ModelSpaceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSpaces(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        city {
+          id
+          title
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSpaces = /* GraphQL */ `
+  query SyncSpaces(
+    $filter: ModelSpaceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSpaces(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        city {
+          id
+          title
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getCity = /* GraphQL */ `
   query GetCity($id: ID!) {
     getCity(id: $id) {

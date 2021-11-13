@@ -1,6 +1,5 @@
 import API, { GraphQLResult } from "@aws-amplify/api";
-import { Button, IconButton } from "@chakra-ui/button";
-import { Center, Flex, Heading } from "@chakra-ui/layout";
+import { Center, Heading } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { GetStaticProps } from "next";
 import React, { ReactElement } from "react";

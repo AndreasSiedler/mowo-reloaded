@@ -83,6 +83,87 @@ export const deleteProduct = /* GraphQL */ `
     }
   }
 `;
+export const createSpace = /* GraphQL */ `
+  mutation CreateSpace(
+    $input: CreateSpaceInput!
+    $condition: ModelSpaceConditionInput
+  ) {
+    createSpace(input: $input, condition: $condition) {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const updateSpace = /* GraphQL */ `
+  mutation UpdateSpace(
+    $input: UpdateSpaceInput!
+    $condition: ModelSpaceConditionInput
+  ) {
+    updateSpace(input: $input, condition: $condition) {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const deleteSpace = /* GraphQL */ `
+  mutation DeleteSpace(
+    $input: DeleteSpaceInput!
+    $condition: ModelSpaceConditionInput
+  ) {
+    deleteSpace(input: $input, condition: $condition) {
+      id
+      title
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      city {
+        id
+        title
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
 export const createCity = /* GraphQL */ `
   mutation CreateCity(
     $input: CreateCityInput!
