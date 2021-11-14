@@ -1,19 +1,11 @@
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Button,
-  HStack,
-  Spacer,
-} from "@chakra-ui/react";
-import React, { ReactElement } from "react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack, Spacer } from "@chakra-ui/react";
+import React, { ReactElement, ReactNode } from "react";
 
 /**
  * Renders a Dashboard action navigation bar
  * @return {ReactElement}
  */
-export default function ActionBar(): ReactElement {
+export default function ActionBar({ children }: { children: ReactNode }): ReactElement {
   return (
     <HStack>
       <Box>
@@ -32,11 +24,7 @@ export default function ActionBar(): ReactElement {
         </Breadcrumb>
       </Box>
       <Spacer />
-      <Box>
-        <Button size="lg" colorScheme="teal" variant="solid">
-          Add Space
-        </Button>
-      </Box>
+      <Box>{children}</Box>
     </HStack>
   );
 }

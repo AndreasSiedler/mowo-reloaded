@@ -59,7 +59,6 @@ export default function Spaces(): ReactElement {
       });
       return response.data.updateProduct;
     } catch (error) {
-      console.log(error);
       toast({
         title: "Failure.",
         description: "Something went wrong.",

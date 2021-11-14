@@ -55,6 +55,15 @@
             }
           },
           {
+            "label": "Images",
+            "name": "images",
+            "type": "dropzone",
+            "placeholder": "Select one option",
+            "validation": {
+              "required": "This is required"
+            }
+          },
+          {
             "label": "Themen",
             "name": "category",
             "type": "multiselect",

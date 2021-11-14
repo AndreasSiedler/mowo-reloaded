@@ -8,6 +8,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
+import ImageDropzone from "./ImageDropzone";
 
 type SelectOption = {
   label: string;
@@ -17,7 +18,7 @@ type SelectOption = {
 type DynamicFormFieldProps = {
   label: string;
   name: string;
-  type: "text" | "textarea" | "email" | "select";
+  type: "text" | "textarea" | "email" | "select" | "dropzone";
   validation: object;
   placeholder?: string;
   options?: SelectOption[];
@@ -73,6 +74,15 @@ export default function DynamicFormField({
               </option>
             ))}
           </Select>
+          <FormErrorMessage>{errors[name] && errors[name].message}</FormErrorMessage>
+        </FormControl>
+      )}
+      {type === "dropzone" && (
+        <FormControl isInvalid={Boolean(errors[name])} isRequired>
+          <FormLabel id={name} htmlFor={name}>
+            {label}
+          </FormLabel>
+          <ImageDropzone />
           <FormErrorMessage>{errors[name] && errors[name].message}</FormErrorMessage>
         </FormControl>
       )}

@@ -1,13 +1,18 @@
 import API, { GraphQLResult } from "@aws-amplify/api";
-import { Center, Heading } from "@chakra-ui/layout";
+import { AddIcon } from "@chakra-ui/icons";
+import { Center } from "@chakra-ui/layout";
+import { IconButton, Tooltip, useToast } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { ListSpacesQuery } from "../../../API";
+import { CreateSpaceMutation, ListSpacesQuery } from "../../../API";
 import ActionBar from "../../../components/ActionBar";
+import ErrorMessage from "../../../components/ErrorMessage";
 import ProductCard from "../../../components/ProductCard";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
+import { createSpace } from "../../../graphql/mutations";
 import { listSpaces } from "../../../graphql/queries";
 
 const fetcher = async () => {
@@ -21,28 +26,8 @@ const fetcher = async () => {
  */
 export default function Spaces(): ReactElement {
   const { data, error } = useSWR("/dashboard/listSpaces", fetcher);
-
-  function ErrorResponse() {
-    if (error) {
-      return (
-        <Center>
-          <Heading as="h4">Something went wrong...</Heading>
-        </Center>
-      );
-    }
-    return null;
-  }
-
-  function LoadingSpinner() {
-    if (!data) {
-      return (
-        <Center>
-          <Spinner />
-        </Center>
-      );
-    }
-    return null;
-  }
+  const router = useRouter();
+  const toast = useToast();
 
   function SpacesGrid() {
     if (data) {
@@ -51,11 +36,52 @@ export default function Spaces(): ReactElement {
     return null;
   }
 
+  async function addSpace() {
+    try {
+      const res = (await API.graphql({
+        query: createSpace,
+        variables: {
+          input: {},
+        },
+      })) as GraphQLResult<CreateSpaceMutation>;
+      const space = res.data.createSpace;
+      router.push(`/dashboard/spaces/${space.id}`);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Failure.",
+        description: "Something went wrong.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+    }
+  }
+
   return (
     <SidebarWithHeader>
-      <ActionBar />
-      <ErrorResponse />
-      <LoadingSpinner />
+      <ActionBar>
+        <Tooltip hasArrow label="Add space">
+          <IconButton
+            aria-label="Add Space"
+            size="lg"
+            colorScheme="teal"
+            variant="solid"
+            icon={<AddIcon />}
+            onClick={addSpace}
+          >
+            <AddIcon mr="10px" />
+            Add Space
+          </IconButton>
+        </Tooltip>
+      </ActionBar>
+      {error && <ErrorMessage error={error} />}
+      {!data && (
+        <Center>
+          <Spinner />
+        </Center>
+      )}
       <SpacesGrid />
     </SidebarWithHeader>
   );
