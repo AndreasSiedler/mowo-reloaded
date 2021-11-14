@@ -2,18 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateProductInput = {
+export type CreateSpaceInput = {
   id?: string | null,
   title?: string | null,
   _version?: number | null,
-  productCityId?: string | null,
+  spaceCityId?: string | null,
 };
 
-export type ModelProductConditionInput = {
+export type ModelSpaceConditionInput = {
   title?: ModelStringInput | null,
-  and?: Array< ModelProductConditionInput | null > | null,
-  or?: Array< ModelProductConditionInput | null > | null,
-  not?: ModelProductConditionInput | null,
+  and?: Array< ModelSpaceConditionInput | null > | null,
+  or?: Array< ModelSpaceConditionInput | null > | null,
+  not?: ModelSpaceConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,8 +56,8 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type Product = {
-  __typename: "Product",
+export type Space = {
+  __typename: "Space",
   id: string,
   title?: string | null,
   _version: number,
@@ -79,45 +79,6 @@ export type City = {
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
-};
-
-export type UpdateProductInput = {
-  id: string,
-  title?: string | null,
-  _version?: number | null,
-  productCityId?: string | null,
-};
-
-export type DeleteProductInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateSpaceInput = {
-  id?: string | null,
-  title?: string | null,
-  _version?: number | null,
-  spaceCityId?: string | null,
-};
-
-export type ModelSpaceConditionInput = {
-  title?: ModelStringInput | null,
-  and?: Array< ModelSpaceConditionInput | null > | null,
-  or?: Array< ModelSpaceConditionInput | null > | null,
-  not?: ModelSpaceConditionInput | null,
-};
-
-export type Space = {
-  __typename: "Space",
-  id: string,
-  title?: string | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-  city?: City | null,
 };
 
 export type UpdateSpaceInput = {
@@ -156,12 +117,12 @@ export type DeleteCityInput = {
   _version?: number | null,
 };
 
-export type ModelProductFilterInput = {
+export type ModelSpaceFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
-  and?: Array< ModelProductFilterInput | null > | null,
-  or?: Array< ModelProductFilterInput | null > | null,
-  not?: ModelProductFilterInput | null,
+  and?: Array< ModelSpaceFilterInput | null > | null,
+  or?: Array< ModelSpaceFilterInput | null > | null,
+  not?: ModelSpaceFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -178,21 +139,6 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
-};
-
-export type ModelProductConnection = {
-  __typename: "ModelProductConnection",
-  items?:  Array<Product | null > | null,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type ModelSpaceFilterInput = {
-  id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  and?: Array< ModelSpaceFilterInput | null > | null,
-  or?: Array< ModelSpaceFilterInput | null > | null,
-  not?: ModelSpaceFilterInput | null,
 };
 
 export type ModelSpaceConnection = {
@@ -215,96 +161,6 @@ export type ModelCityConnection = {
   items?:  Array<City | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
-};
-
-export type CreateProductMutationVariables = {
-  input: CreateProductInput,
-  condition?: ModelProductConditionInput | null,
-};
-
-export type CreateProductMutation = {
-  createProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
-};
-
-export type UpdateProductMutationVariables = {
-  input: UpdateProductInput,
-  condition?: ModelProductConditionInput | null,
-};
-
-export type UpdateProductMutation = {
-  updateProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
-};
-
-export type DeleteProductMutationVariables = {
-  input: DeleteProductInput,
-  condition?: ModelProductConditionInput | null,
-};
-
-export type DeleteProductMutation = {
-  deleteProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
 };
 
 export type CreateSpaceMutationVariables = {
@@ -451,108 +307,6 @@ export type DeleteCityMutation = {
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
-  } | null,
-};
-
-export type GetProductQueryVariables = {
-  id: string,
-};
-
-export type GetProductQuery = {
-  getProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
-};
-
-export type ListProductsQueryVariables = {
-  filter?: ModelProductFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListProductsQuery = {
-  listProducts?:  {
-    __typename: "ModelProductConnection",
-    items?:  Array< {
-      __typename: "Product",
-      id: string,
-      title?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      city?:  {
-        __typename: "City",
-        id: string,
-        title: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncProductsQueryVariables = {
-  filter?: ModelProductFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncProductsQuery = {
-  syncProducts?:  {
-    __typename: "ModelProductConnection",
-    items?:  Array< {
-      __typename: "Product",
-      id: string,
-      title?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      city?:  {
-        __typename: "City",
-        id: string,
-        title: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -724,81 +478,6 @@ export type SyncCitiesQuery = {
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
-  } | null,
-};
-
-export type OnCreateProductSubscription = {
-  onCreateProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnUpdateProductSubscription = {
-  onUpdateProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnDeleteProductSubscription = {
-  onDeleteProduct?:  {
-    __typename: "Product",
-    id: string,
-    title?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-    city?:  {
-      __typename: "City",
-      id: string,
-      title: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null,
   } | null,
 };
 
