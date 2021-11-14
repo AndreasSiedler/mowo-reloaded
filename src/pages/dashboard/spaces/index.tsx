@@ -1,22 +1,32 @@
-import API, { GraphQLResult } from "@aws-amplify/api";
+import API, { GraphQLResult, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
+import { CognitoUser } from "@aws-amplify/auth";
 import { AddIcon } from "@chakra-ui/icons";
-import { Center } from "@chakra-ui/layout";
+import { Center, SimpleGrid } from "@chakra-ui/layout";
 import { IconButton, Tooltip, useToast } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { CreateSpaceMutation, ListSpacesQuery } from "../../../API";
+import { CreateSpaceInput, CreateSpaceMutation, ListSpacesQuery } from "../../../API";
 import ActionBar from "../../../components/ActionBar";
 import ErrorMessage from "../../../components/ErrorMessage";
 import ProductCard from "../../../components/ProductCard";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
+import { toastErrorConfig } from "../../../config/constants";
+import { useUser } from "../../../context/AuthContext";
 import { createSpace } from "../../../graphql/mutations";
 import { listSpaces } from "../../../graphql/queries";
 
-const fetcher = async () => {
-  const response = (await API.graphql({ query: listSpaces })) as GraphQLResult<ListSpacesQuery>;
+const fetcher = async (user: CognitoUser) => {
+  const response = (await API.graphql({
+    query: listSpaces,
+    variables: {
+      input: {
+        _deleted: !true,
+      },
+    },
+  })) as GraphQLResult<ListSpacesQuery>;
   return response.data.listSpaces.items;
 };
 
@@ -25,37 +35,28 @@ const fetcher = async () => {
  * @return {ReactElement}
  */
 export default function Spaces(): ReactElement {
+  const { user } = useUser();
+  if (user) {
+    console.log(user.getUsername());
+  }
   const { data, error } = useSWR("/dashboard/listSpaces", fetcher);
   const router = useRouter();
   const toast = useToast();
 
-  function SpacesGrid() {
-    if (data) {
-      return <> {data && data.map((item) => <ProductCard key={item.id} {...item} />)}</>;
-    }
-    return null;
-  }
-
   async function addSpace() {
     try {
+      const createSpaceInput: CreateSpaceInput = {};
       const res = (await API.graphql({
         query: createSpace,
         variables: {
-          input: {},
+          input: createSpaceInput,
         },
+        authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
       })) as GraphQLResult<CreateSpaceMutation>;
       const space = res.data.createSpace;
       router.push(`/dashboard/spaces/${space.id}`);
     } catch (error) {
-      console.log(error);
-      toast({
-        title: "Failure.",
-        description: "Something went wrong.",
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-        position: "bottom-right",
-      });
+      toast({ ...toastErrorConfig });
     }
   }
 
@@ -82,7 +83,9 @@ export default function Spaces(): ReactElement {
           <Spinner />
         </Center>
       )}
-      <SpacesGrid />
+      <SimpleGrid columns={[1, 2, 2, 3, 4]}>
+        {data && data.map((item) => <ProductCard key={item.id} {...item} />)}
+      </SimpleGrid>
     </SidebarWithHeader>
   );
 }

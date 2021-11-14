@@ -1,14 +1,16 @@
 import { Box, Text } from "@chakra-ui/layout";
 import React, { ReactElement, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Center, SimpleGrid, Image } from "@chakra-ui/react";
+import { Center, SimpleGrid, Image, useToast } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
+import { Storage } from "aws-amplify";
 
 /**
  * Renders a image drop zone with image previews
  * @return {ReactElement}
  */
 export default function ImageDropzone(): ReactElement {
+  const toast = useToast();
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -16,6 +18,25 @@ export default function ImageDropzone(): ReactElement {
       setFiles(acceptedFiles.map((file) => Object.assign(file)));
     },
   });
+
+  async function uploadImages(files: File[]) {
+    files.forEach(async (file) => {
+      try {
+        await Storage.put(file.name, file, {
+          contentType: "image/png", // contentType is optional
+        });
+      } catch (error) {
+        toast({
+          title: "Failure.",
+          description: "Something went wrong.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "bottom-right",
+        });
+      }
+    });
+  }
 
   const thumbnails = files.map((file) => (
     <Box key={file.name} width="100%">

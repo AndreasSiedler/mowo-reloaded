@@ -58,10 +58,7 @@
             "label": "Images",
             "name": "images",
             "type": "dropzone",
-            "placeholder": "Select one option",
-            "validation": {
-              "required": "This is required"
-            }
+            "placeholder": "Select one option"
           },
           {
             "label": "Themen",

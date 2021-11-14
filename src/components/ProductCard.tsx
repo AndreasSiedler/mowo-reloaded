@@ -75,7 +75,7 @@ function ProductCard({ id, title }: Space): ReactElement {
           maxW="sm"
           borderWidth="1px"
           rounded="lg"
-          shadow="lg"
+          shadow="sm"
           position="relative"
         >
           {data.isNew && <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />}

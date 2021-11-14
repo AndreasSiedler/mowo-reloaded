@@ -12,7 +12,7 @@ export default function FormFieldsGenerator(props: FormFieldsGeneratorProps) {
   return (
     <>
       {data.formBlocks.map((block) => (
-        <Grid key={block.title} templateColumns="repeat(12, 1fr)" gap={4}>
+        <Grid key={block.title} templateColumns="repeat(12, 1fr)" gap={10}>
           <GridItem colSpan={[12, 4]}>
             <Box>
               <Heading as="h4">{block.title}</Heading>
