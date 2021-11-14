@@ -15,7 +15,7 @@ import {
 import { ReactElement } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
-import { Product } from "../API";
+import { Space } from "../API";
 
 const data = {
   id: "123",
@@ -66,7 +66,7 @@ function Rating({ rating, numReviews }: RatingProps) {
  * @param {Product} props
  * @return {ReactElement}
  */
-function ProductCard({ id, title }: Product): ReactElement {
+function ProductCard({ id, title }: Space): ReactElement {
   return (
     <LinkBox>
       <Flex p={5} w="full" alignItems="center" justifyContent="center">

@@ -4,15 +4,15 @@ import { Spinner } from "@chakra-ui/spinner";
 import { GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { ListProductsQuery } from "../../../API";
+import { ListSpacesQuery } from "../../../API";
 import ActionBar from "../../../components/ActionBar";
 import ProductCard from "../../../components/ProductCard";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
-import { listProducts } from "../../../graphql/queries";
+import { listSpaces } from "../../../graphql/queries";
 
 const fetcher = async () => {
-  const response = (await API.graphql({ query: listProducts })) as GraphQLResult<ListProductsQuery>;
-  return response.data.listProducts.items;
+  const response = (await API.graphql({ query: listSpaces })) as GraphQLResult<ListSpacesQuery>;
+  return response.data.listSpaces.items;
 };
 
 /**
@@ -20,7 +20,7 @@ const fetcher = async () => {
  * @return {ReactElement}
  */
 export default function Spaces(): ReactElement {
-  const { data, error } = useSWR("/amplify/listProducts", fetcher);
+  const { data, error } = useSWR("/dashboard/listSpaces", fetcher);
 
   function ErrorResponse() {
     if (error) {

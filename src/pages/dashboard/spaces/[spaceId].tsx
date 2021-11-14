@@ -6,22 +6,22 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { GetProductQuery, Product, UpdateProductMutation } from "../../../API";
+import { GetSpaceQuery, Space, UpdateProductMutation } from "../../../API";
 import ErrorMessage from "../../../components/ErrorMessage";
 import FormGenerator from "../../../components/FormGenerator";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import ProductFormFields from "../../../config/spaces_form_fields.json";
 import { updateProduct } from "../../../graphql/mutations";
-import { getProduct } from "../../../graphql/queries";
+import { getSpace } from "../../../graphql/queries";
 
 const fetcher = async (spaceId: string) => {
   const response = (await API.graphql({
-    query: getProduct,
+    query: getSpace,
     variables: {
       id: spaceId,
     },
-  })) as GraphQLResult<GetProductQuery>;
-  return response.data.getProduct;
+  })) as GraphQLResult<GetSpaceQuery>;
+  return response.data.getSpace;
 };
 
 /**
@@ -31,10 +31,10 @@ const fetcher = async (spaceId: string) => {
 export default function Spaces(): ReactElement {
   const router = useRouter();
   const { spaceId } = router.query;
-  const { data, error } = useSWR("/amplify/getProduct", () => fetcher(spaceId as string));
+  const { data, error } = useSWR("/dashboard/spaces/getSpace", () => fetcher(spaceId as string));
   const toast = useToast();
 
-  async function handleSubmit(data: Product) {
+  async function handleSubmit(data: Space) {
     console.log("data", data);
     try {
       const input = {
