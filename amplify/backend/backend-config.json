@@ -54,5 +54,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "mowo": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

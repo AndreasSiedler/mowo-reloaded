@@ -1,6 +1,6 @@
 {
     "identityPoolName": "sharedventuread3cdc8b_identitypool_ad3cdc8b",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "sharedad3cdc8b",
     "userPoolName": "sharedventuread3cdc8b_userpool_ad3cdc8b",
     "autoVerifiedAttributes": [
