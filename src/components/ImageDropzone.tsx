@@ -13,13 +13,7 @@ export default function ImageDropzone(): ReactElement {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+      setFiles(acceptedFiles.map((file) => Object.assign(file)));
     },
   });
 
@@ -29,7 +23,7 @@ export default function ImageDropzone(): ReactElement {
         align="center"
         boxSize="200px"
         objectFit="cover"
-        src={file.preview}
+        src={URL.createObjectURL(file)}
         alt={file.name}
         fallbackSrc="https://via.placeholder.com/150"
       />
