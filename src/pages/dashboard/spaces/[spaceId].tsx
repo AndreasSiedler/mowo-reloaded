@@ -52,6 +52,7 @@ export default function Spaces(): ReactElement {
       const input: UpdateSpaceInput = {
         id: data.id,
         title: data.title,
+        _version: data._version,
       };
 
       const response = (await API.graphql({
