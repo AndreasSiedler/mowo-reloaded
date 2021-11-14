@@ -1,9 +1,34 @@
 import { GraphQLResult } from "@aws-amplify/api";
+import { Container, Grid, GridItem, Heading } from "@chakra-ui/react";
 import { withSSRContext } from "aws-amplify";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { GetSpaceQuery, ListSpacesQuery, Space } from "../../API";
+import SwiperGallery from "../../components/SwiperGallery";
 import { getSpace, listSpaces } from "../../graphql/queries";
+
+const dummyImages = [
+  {
+    img: "https://images.unsplash.com/photo-1426901523280-39daa6101bce",
+    title: "Random image",
+    alt: "Random alt text",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1426901555017-389235de7b0d",
+    title: "Random image",
+    alt: "Random alt text",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1425321395722-b1dd54a97cf3",
+    title: "Random image",
+    alt: "Random alt text",
+  },
+  {
+    img: "https://images.unsplash.com/photo-1426901428072-737be6c018f9",
+    title: "Random image",
+    alt: "Random alt text",
+  },
+];
 
 type SpaceDetailProps = {
   space: Space;
@@ -14,7 +39,21 @@ type SpaceDetailProps = {
  * @return {ReactElement}
  */
 export default function SpaceDetail({ space }: SpaceDetailProps): ReactElement {
-  return <div>{JSON.stringify(space)}</div>;
+  return (
+    <>
+      <section>
+        <SwiperGallery data={dummyImages} />
+        <Container maxW="container.xl">
+          <Grid h="200px" templateColumns="repeat(12, 1fr)" gap={4}>
+            <GridItem colSpan={[12, 8]}>
+              {space.title && <Heading size="xl">{space.title}</Heading>}
+            </GridItem>
+            <GridItem colSpan={[12, 4]} bg="tomato" />
+          </Grid>
+        </Container>
+      </section>
+    </>
+  );
 }
 
 // This function gets called at build time on server-side.

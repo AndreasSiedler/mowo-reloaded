@@ -21,6 +21,8 @@
     "react-dom": "17.0.2",
     "react-hook-form": "^7.19.1",
     "react-icons": "^4.3.1",
+    "react-image-lightbox": "^5.1.4",
+    "swiper": "^7.2.0",
     "swr": "^1.0.1"
   },
   "devDependencies": {
