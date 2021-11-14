@@ -16,6 +16,7 @@ export declare class Space {
   readonly id: string;
   readonly title?: string;
   readonly city?: City;
+  readonly owner?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Space, SpaceMetaData>);

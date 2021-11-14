@@ -7,12 +7,12 @@ export const getSpace = /* GraphQL */ `
     getSpace(id: $id) {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title
@@ -36,12 +36,12 @@ export const listSpaces = /* GraphQL */ `
       items {
         id
         title
+        owner
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         city {
           id
           title
@@ -74,12 +74,12 @@ export const syncSpaces = /* GraphQL */ `
       items {
         id
         title
+        owner
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
-        owner
         city {
           id
           title

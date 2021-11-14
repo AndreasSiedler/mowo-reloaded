@@ -30,6 +30,13 @@ export const schema = {
                         "targetName": "spaceCityId"
                     }
                 },
+                "owner": {
+                    "name": "owner",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -164,5 +171,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "815c25d2007c69608e883912b3f3726c"
+    "version": "bfc68748c3664aea4d0563774c50b3e6"
 };

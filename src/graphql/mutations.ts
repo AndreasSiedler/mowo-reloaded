@@ -10,12 +10,12 @@ export const createSpace = /* GraphQL */ `
     createSpace(input: $input, condition: $condition) {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title
@@ -37,12 +37,12 @@ export const updateSpace = /* GraphQL */ `
     updateSpace(input: $input, condition: $condition) {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title
@@ -64,12 +64,12 @@ export const deleteSpace = /* GraphQL */ `
     deleteSpace(input: $input, condition: $condition) {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title

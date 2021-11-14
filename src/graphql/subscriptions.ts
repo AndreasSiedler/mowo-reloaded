@@ -7,12 +7,12 @@ export const onCreateSpace = /* GraphQL */ `
     onCreateSpace {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title
@@ -31,12 +31,12 @@ export const onUpdateSpace = /* GraphQL */ `
     onUpdateSpace {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title
@@ -55,12 +55,12 @@ export const onDeleteSpace = /* GraphQL */ `
     onDeleteSpace {
       id
       title
+      owner
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-      owner
       city {
         id
         title

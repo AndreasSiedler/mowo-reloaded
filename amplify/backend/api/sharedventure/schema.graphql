@@ -2,7 +2,7 @@ type Space
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, update, delete, read] }
+      { allow: owner, ownerField: "owner", operations: [create, update, delete, read] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
@@ -10,6 +10,7 @@ type Space
   id: ID!
   title: String
   city: City @connection
+  owner: String
 }
 
 type City
