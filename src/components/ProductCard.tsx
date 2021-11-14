@@ -66,7 +66,7 @@ function Rating({ rating, numReviews }: RatingProps) {
  * @param {Product} props
  * @return {ReactElement}
  */
-function ProductCard({ id, title }: Space): ReactElement {
+function ProductCard({ id, title, _deleted }: Space): ReactElement {
   return (
     <LinkBox>
       <Flex p={5} w="full" alignItems="center" justifyContent="center">
@@ -84,9 +84,9 @@ function ProductCard({ id, title }: Space): ReactElement {
 
           <Box p="6">
             <Box d="flex" alignItems="baseline">
-              {data.isNew && (
+              {_deleted && (
                 <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  New
+                  Deleted
                 </Badge>
               )}
             </Box>

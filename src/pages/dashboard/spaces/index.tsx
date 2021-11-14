@@ -8,7 +8,13 @@ import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 import useSWR from "swr";
-import { CreateSpaceInput, CreateSpaceMutation, ListSpacesQuery } from "../../../API";
+import {
+  CreateSpaceInput,
+  CreateSpaceMutation,
+  ListSpacesQuery,
+  ListSpacesQueryVariables,
+  ModelSpaceFilterInput,
+} from "../../../API";
 import ActionBar from "../../../components/ActionBar";
 import ErrorMessage from "../../../components/ErrorMessage";
 import ProductCard from "../../../components/ProductCard";
@@ -19,15 +25,21 @@ import { createSpace } from "../../../graphql/mutations";
 import { listSpaces } from "../../../graphql/queries";
 
 const fetcher = async (user: CognitoUser) => {
+  const filter: ModelSpaceFilterInput = {
+    owner: {
+      eq: "47db3a8d-1f6d-41b7-a0c7-85008b01c81b",
+    },
+  };
+
+  const variables: ListSpacesQueryVariables = {
+    filter: filter,
+  };
+
   const response = (await API.graphql({
     query: listSpaces,
-    variables: {
-      input: {
-        _deleted: !true,
-      },
-    },
+    variables: variables,
   })) as GraphQLResult<ListSpacesQuery>;
-  return response.data.listSpaces.items;
+  return response.data.listSpaces.items.filter((item) => item._deleted !== true);
 };
 
 /**
@@ -36,10 +48,7 @@ const fetcher = async (user: CognitoUser) => {
  */
 export default function Spaces(): ReactElement {
   const { user } = useUser();
-  if (user) {
-    console.log(user.getUsername());
-  }
-  const { data, error } = useSWR("/dashboard/listSpaces", fetcher);
+  const { data, error } = useSWR("/dashboard/listSpaces", () => fetcher(user));
   const router = useRouter();
   const toast = useToast();
 

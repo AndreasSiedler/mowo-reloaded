@@ -1,4 +1,5 @@
 import API, { GraphQLResult, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
+import { GraphQLOptions } from "@aws-amplify/api-graphql";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Center } from "@chakra-ui/layout";
 import { IconButton, Tooltip } from "@chakra-ui/react";
@@ -12,6 +13,7 @@ import {
   DeleteSpaceInput,
   DeleteSpaceMutation,
   GetSpaceQuery,
+  GetSpaceQueryVariables,
   Space,
   UpdateSpaceInput,
   UpdateSpaceMutation,
@@ -26,11 +28,12 @@ import { updateSpace, deleteSpace } from "../../../graphql/mutations";
 import { getSpace } from "../../../graphql/queries";
 
 const fetcher = async (spaceId: string) => {
+  const variables: GetSpaceQueryVariables = {
+    id: spaceId,
+  };
   const response = (await API.graphql({
     query: getSpace,
-    variables: {
-      id: spaceId,
-    },
+    variables: variables,
   })) as GraphQLResult<GetSpaceQuery>;
   return response.data.getSpace;
 };
