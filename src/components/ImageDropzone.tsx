@@ -8,6 +8,7 @@ import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
 export interface UploadableFile {
   file: File;
   errors: FileError[];
+  key?: string;
 }
 
 /**
@@ -22,6 +23,21 @@ export default function ImageDropzone(): ReactElement {
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
 
+  function onDelete(file: File) {
+    setFiles((currFiles) => currFiles.filter((fw) => fw.file !== file));
+  }
+
+  function onUpload(file: File, key: string) {
+    setFiles((currFiles) =>
+      currFiles.map((fw) => {
+        if (fw.file === file) {
+          return { ...fw, key };
+        }
+        return fw;
+      })
+    );
+  }
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: onDrop,
@@ -29,6 +45,8 @@ export default function ImageDropzone(): ReactElement {
 
   return (
     <>
+      <pre>{JSON.stringify(files, null, 2)}</pre>
+
       <Box
         border="dotted"
         borderRadius="lg"
@@ -44,10 +62,16 @@ export default function ImageDropzone(): ReactElement {
           </VStack>
         </Center>
       </Box>
-      {files.map((fileWrapper, idx) => (
-        <SingleFileUploadWithProgress key={idx} file={fileWrapper.file} />
-      ))}
-      {JSON.stringify(files)}
+      <VStack>
+        {files.map((fileWrapper, idx) => (
+          <SingleFileUploadWithProgress
+            key={idx}
+            file={fileWrapper.file}
+            onDelete={onDelete}
+            onUpload={onUpload}
+          />
+        ))}
+      </VStack>
     </>
   );
 }

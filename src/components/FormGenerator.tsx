@@ -33,6 +33,7 @@ export default function FormGenerator({
           <FormFieldsGenerator data={formData} />
           <Button type="submit">Speichern</Button>
         </form>
+        <pre>{JSON.stringify(methods.getValues(), null, 2)}</pre>
       </FormProvider>
     </Container>
   );

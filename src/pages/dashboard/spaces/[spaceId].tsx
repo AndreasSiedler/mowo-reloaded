@@ -1,5 +1,4 @@
 import API, { GraphQLResult, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
-import { GraphQLOptions } from "@aws-amplify/api-graphql";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { Center } from "@chakra-ui/layout";
 import { IconButton, Tooltip } from "@chakra-ui/react";
