@@ -1,84 +1,53 @@
-import { Box, Text } from "@chakra-ui/layout";
-import React, { ReactElement, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { Center, SimpleGrid, Image, useToast } from "@chakra-ui/react";
-import { DownloadIcon } from "@chakra-ui/icons";
-import { Storage } from "aws-amplify";
+import { Box, Text, VStack } from "@chakra-ui/layout";
+import React, { ReactElement, useCallback, useState } from "react";
+import { FileError, FileRejection, useDropzone } from "react-dropzone";
+import { Center, Icon } from "@chakra-ui/react";
+import { BsFillCloudArrowUpFill } from "react-icons/bs";
+import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
+
+export interface UploadableFile {
+  file: File;
+  errors: FileError[];
+}
 
 /**
  * Renders a image drop zone with image previews
  * @return {ReactElement}
  */
 export default function ImageDropzone(): ReactElement {
-  const toast = useToast();
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<UploadableFile[]>([]);
+
+  const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
+    const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
+    setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
+  }, []);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFiles(acceptedFiles.map((file) => Object.assign(file)));
-    },
+    onDrop: onDrop,
   });
 
-  async function uploadImages(files: File[]) {
-    files.forEach(async (file) => {
-      try {
-        await Storage.put(file.name, file, {
-          contentType: "image/png", // contentType is optional
-        });
-      } catch (error) {
-        toast({
-          title: "Failure.",
-          description: "Something went wrong.",
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-          position: "bottom-right",
-        });
-      }
-    });
-  }
-
-  const thumbnails = files.map((file) => (
-    <Box key={file.name} width="100%">
-      <Image
-        align="center"
-        boxSize="200px"
-        objectFit="cover"
-        src={URL.createObjectURL(file)}
-        alt={file.name}
-        fallbackSrc="https://via.placeholder.com/150"
-      />
-    </Box>
-  ));
-
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
-
   return (
-    <Box>
-      <Box as="aside">
-        <SimpleGrid columns={[2, 2, 2, 3, 4]} spacing="4">
-          {thumbnails}
-          <Box
-            width="100%"
-            height="200px"
-            border="1px dashed"
-            borderRadius="lg"
-            {...getRootProps({ className: "dropzone" })}
-          >
-            <Center>
-              <input {...getInputProps()} />
-              <DownloadIcon />
-              <Text>Drag and drop some files here, or click to select files</Text>
-            </Center>
-          </Box>
-        </SimpleGrid>
+    <>
+      <Box
+        border="dotted"
+        borderRadius="lg"
+        borderColor="gray.300"
+        borderWidth="medium"
+        {...getRootProps({ className: "dropzone" })}
+      >
+        <Center height="200px">
+          <input {...getInputProps()} />
+          <VStack>
+            <Icon w="24" h={"24"} as={BsFillCloudArrowUpFill} color="gray.500" />
+            <Text align="center">Drag and drop some files here, or click to select files</Text>
+          </VStack>
+        </Center>
       </Box>
-    </Box>
+      {files.map((fileWrapper, idx) => (
+        <SingleFileUploadWithProgress key={idx} file={fileWrapper.file} />
+      ))}
+      {JSON.stringify(files)}
+    </>
   );
 }

@@ -48,8 +48,8 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function SidebarWithHeader({ children }: { children: ReactNode }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useUser();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   if (!user) {
     return (
