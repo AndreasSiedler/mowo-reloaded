@@ -34,7 +34,7 @@ export default function SingleFileUploadWithProgress({
   }, []);
 
   return (
-    <Box width="100%">
+    <Box>
       <FileHeader file={file} onDelete={onDelete} />
       <Progress value={progress} />
     </Box>

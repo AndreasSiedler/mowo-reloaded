@@ -17,7 +17,7 @@ import {
 } from "../../../API";
 import ActionBar from "../../../components/ActionBar";
 import ErrorMessage from "../../../components/ErrorMessage";
-import ProductCard from "../../../components/ProductCard";
+import SpaceCard from "../../../components/SpaceCard";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { toastErrorConfig } from "../../../config/constants";
 import { useUser } from "../../../context/AuthContext";
@@ -93,7 +93,7 @@ export default function Spaces(): ReactElement {
         </Center>
       )}
       <SimpleGrid columns={[1, 2, 2, 3, 4]}>
-        {data && data.map((item) => <ProductCard key={item.id} {...item} />)}
+        {data && data.map((item) => <SpaceCard key={item.id} {...item} />)}
       </SimpleGrid>
     </SidebarWithHeader>
   );

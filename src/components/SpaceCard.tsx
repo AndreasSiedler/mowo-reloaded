@@ -13,10 +13,10 @@ import {
   LinkOverlay,
 } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
-import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { Space } from "../API";
 import Storage from "@aws-amplify/storage";
+import Rating from "./Rating";
 
 const data = {
   id: "123",
@@ -29,45 +29,12 @@ const data = {
   numReviews: 34,
 };
 
-interface RatingProps {
-  rating: number;
-  numReviews: number;
-}
-
-function Rating({ rating, numReviews }: RatingProps) {
-  return (
-    <Box d="flex" alignItems="center">
-      {Array(5)
-        .fill("")
-        .map((_, i) => {
-          const roundedRating = Math.round(rating * 2) / 2;
-          if (roundedRating - i >= 1) {
-            return (
-              <BsStarFill
-                key={i}
-                style={{ marginLeft: "1" }}
-                color={i < rating ? "teal.500" : "gray.300"}
-              />
-            );
-          }
-          if (roundedRating - i === 0.5) {
-            return <BsStarHalf key={i} style={{ marginLeft: "1" }} />;
-          }
-          return <BsStar key={i} style={{ marginLeft: "1" }} />;
-        })}
-      <Box as="span" ml="2" color="gray.600" fontSize="sm">
-        {numReviews} review{numReviews > 1 && "s"}
-      </Box>
-    </Box>
-  );
-}
-
 /**
- * ProductCard renders a Card with a product image, title, description and price
+ * SpaceCard renders a card with a space image, title, description and price
  * @param {Product} props
  * @return {ReactElement}
  */
-function ProductCard({ id, title, images, _deleted }: Space): ReactElement {
+export default function SpaceCard({ id, title, images, _deleted }: Space): ReactElement {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
@@ -78,7 +45,7 @@ function ProductCard({ id, title, images, _deleted }: Space): ReactElement {
     }
 
     async function loadImages() {
-      const imageUrls = await Promise.all(images.map(async (img) => getImageUrl(img.key)));
+      const imageUrls = await Promise.all<string>(images.map(async (img) => getImageUrl(img.key)));
       setImageUrls(imageUrls);
     }
 
@@ -142,5 +109,3 @@ function ProductCard({ id, title, images, _deleted }: Space): ReactElement {
     </LinkBox>
   );
 }
-
-export default ProductCard;

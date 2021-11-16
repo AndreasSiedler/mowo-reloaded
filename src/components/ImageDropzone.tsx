@@ -1,10 +1,27 @@
 import { Box, Text, VStack } from "@chakra-ui/layout";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
-import { Center, Icon } from "@chakra-ui/react";
+import { Center, Icon, StackDivider } from "@chakra-ui/react";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
-import { ImageInput } from "../API";
+import { Image, ImageInput } from "../API";
+import UploadError from "./UploadError";
+import Storage from "@aws-amplify/storage";
+
+/**
+ * Maps an server Image object to an UploadableFile, which is needed by the Dropzone component.
+ * @param {Image} img
+ * @return {UploadableFile}
+ */
+async function mapImageInputToUploadableImage(img: Image): Promise<UploadableFile> {
+  const result = await Storage.get(img.key, { download: true });
+  const uplFile: UploadableFile = {
+    file: new File([result.Body as Blob], "name"),
+    key: img.key,
+    errors: [],
+  };
+  return uplFile;
+}
 
 export interface UploadableFile {
   file: File;
@@ -13,7 +30,7 @@ export interface UploadableFile {
 }
 
 export interface ImageDropzoneProps {
-  initialValues?: UploadableFile[];
+  initialValues?: Image[];
   onChange: (files: ImageInput[]) => void;
 }
 
@@ -34,8 +51,15 @@ export default function ImageDropzone({
 
   // Set initial values
   useEffect(() => {
+    async function loadImages() {
+      const images = await Promise.all<UploadableFile>(
+        initialValues.map((img) => mapImageInputToUploadableImage(img))
+      );
+      setFiles((curr) => [...curr, ...images]);
+    }
+
     if (initialValues) {
-      setFiles((curr) => [...curr, ...initialValues]);
+      loadImages();
     }
   }, [initialValues]);
 
@@ -60,8 +84,9 @@ export default function ImageDropzone({
   }
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
+    accept: ["image/*"],
     onDrop: onDrop,
+    maxSize: 300 * 1024, // 300KB
   });
 
   return (
@@ -81,16 +106,23 @@ export default function ImageDropzone({
           </VStack>
         </Center>
       </Box>
-      <VStack>
-        {files.map((fileWrapper, idx) => (
-          <SingleFileUploadWithProgress
-            key={idx}
-            file={fileWrapper.file}
-            onDelete={onDelete}
-            onUpload={onUpload}
-          />
+      <VStack divider={<StackDivider borderColor="gray.200" />} spacing={4} align="stretch">
+        {files.map((fw, idx) => (
+          <>
+            {fw.errors.length ? (
+              <UploadError key={idx} file={fw.file} errors={fw.errors} onDelete={onDelete} />
+            ) : (
+              <SingleFileUploadWithProgress
+                key={idx}
+                file={fw.file}
+                onDelete={onDelete}
+                onUpload={onUpload}
+              />
+            )}
+          </>
         ))}
       </VStack>
+      {JSON.stringify(files)}
     </>
   );
 }

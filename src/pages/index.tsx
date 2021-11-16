@@ -3,7 +3,7 @@ import { listSpaces } from "../graphql/queries";
 import { GraphQLResult } from "@aws-amplify/api";
 import { GetServerSideProps } from "next";
 import { withSSRContext } from "aws-amplify";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/SpaceCard";
 import { Container, SimpleGrid } from "@chakra-ui/react";
 import Hero from "../components/Hero";
 
