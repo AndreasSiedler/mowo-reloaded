@@ -6,8 +6,13 @@ export type CreateSpaceInput = {
   id?: string | null,
   title?: string | null,
   owner?: string | null,
+  images?: Array< ImageInput | null > | null,
   _version?: number | null,
   spaceCityId?: string | null,
+};
+
+export type ImageInput = {
+  key?: string | null,
 };
 
 export type ModelSpaceConditionInput = {
@@ -62,12 +67,18 @@ export type Space = {
   id: string,
   title?: string | null,
   owner?: string | null,
+  images?:  Array<Image | null > | null,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   city?: City | null,
+};
+
+export type Image = {
+  __typename: "Image",
+  key?: string | null,
 };
 
 export type City = {
@@ -86,6 +97,7 @@ export type UpdateSpaceInput = {
   id: string,
   title?: string | null,
   owner?: string | null,
+  images?: Array< ImageInput | null > | null,
   _version?: number | null,
   spaceCityId?: string | null,
 };
@@ -177,6 +189,10 @@ export type CreateSpaceMutation = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -207,6 +223,10 @@ export type UpdateSpaceMutation = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -237,6 +257,10 @@ export type DeleteSpaceMutation = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -323,6 +347,10 @@ export type GetSpaceQuery = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -356,6 +384,10 @@ export type ListSpacesQuery = {
       id: string,
       title?: string | null,
       owner?: string | null,
+      images?:  Array< {
+        __typename: "Image",
+        key?: string | null,
+      } | null > | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -393,6 +425,10 @@ export type SyncSpacesQuery = {
       id: string,
       title?: string | null,
       owner?: string | null,
+      images?:  Array< {
+        __typename: "Image",
+        key?: string | null,
+      } | null > | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -490,6 +526,10 @@ export type OnCreateSpaceSubscription = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -515,6 +555,10 @@ export type OnUpdateSpaceSubscription = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -540,6 +584,10 @@ export type OnDeleteSpaceSubscription = {
     id: string,
     title?: string | null,
     owner?: string | null,
+    images?:  Array< {
+      __typename: "Image",
+      key?: string | null,
+    } | null > | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,

@@ -11,6 +11,7 @@ type Space
   title: String
   city: City @connection
   owner: String
+  images: [Image]
 }
 
 type City
@@ -24,4 +25,8 @@ type City
   ) {
   id: ID!
   title: String!
+}
+
+type Image {
+  key: String
 }

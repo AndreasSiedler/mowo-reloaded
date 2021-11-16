@@ -11,6 +11,9 @@ export const createSpace = /* GraphQL */ `
       id
       title
       owner
+      images {
+        key
+      }
       _version
       _deleted
       _lastChangedAt
@@ -38,6 +41,9 @@ export const updateSpace = /* GraphQL */ `
       id
       title
       owner
+      images {
+        key
+      }
       _version
       _deleted
       _lastChangedAt
@@ -65,6 +71,9 @@ export const deleteSpace = /* GraphQL */ `
       id
       title
       owner
+      images {
+        key
+      }
       _version
       _deleted
       _lastChangedAt

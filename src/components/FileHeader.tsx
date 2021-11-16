@@ -7,6 +7,12 @@ interface Props {
   onDelete: (file: File) => void;
 }
 
+/**
+ * Renders a file header with file name and delete button
+ * @param {File} file
+ * @param {Function} onDelete
+ * @return {ReactElement}
+ */
 export default function FileHeader({ file, onDelete }: Props): ReactElement {
   return (
     <HStack>

@@ -8,6 +8,9 @@ export const getSpace = /* GraphQL */ `
       id
       title
       owner
+      images {
+        key
+      }
       _version
       _deleted
       _lastChangedAt
@@ -37,6 +40,9 @@ export const listSpaces = /* GraphQL */ `
         id
         title
         owner
+        images {
+          key
+        }
         _version
         _deleted
         _lastChangedAt
@@ -75,6 +81,9 @@ export const syncSpaces = /* GraphQL */ `
         id
         title
         owner
+        images {
+          key
+        }
         _version
         _deleted
         _lastChangedAt

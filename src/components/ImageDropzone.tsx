@@ -1,9 +1,10 @@
 import { Box, Text, VStack } from "@chakra-ui/layout";
-import React, { ReactElement, useCallback, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
 import { Center, Icon } from "@chakra-ui/react";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
+import { ImageInput } from "../API";
 
 export interface UploadableFile {
   file: File;
@@ -11,17 +12,37 @@ export interface UploadableFile {
   key?: string;
 }
 
+export interface ImageDropzoneProps {
+  initialValues?: UploadableFile[];
+  onChange: (files: ImageInput[]) => void;
+}
+
 /**
  * Renders a image drop zone with image previews
  * @return {ReactElement}
  */
-export default function ImageDropzone(): ReactElement {
+export default function ImageDropzone({
+  initialValues,
+  onChange,
+}: ImageDropzoneProps): ReactElement {
   const [files, setFiles] = useState<UploadableFile[]>([]);
 
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
     setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
   }, []);
+
+  // Set initial values
+  useEffect(() => {
+    if (initialValues) {
+      setFiles((curr) => [...curr, ...initialValues]);
+    }
+  }, [initialValues]);
+
+  // Run onChange if files changes
+  useEffect(() => {
+    onChange(files.map((fw) => ({ key: fw.key })));
+  }, [files]);
 
   function onDelete(file: File) {
     setFiles((currFiles) => currFiles.filter((fw) => fw.file !== file));
@@ -45,8 +66,6 @@ export default function ImageDropzone(): ReactElement {
 
   return (
     <>
-      <pre>{JSON.stringify(files, null, 2)}</pre>
-
       <Box
         border="dotted"
         borderRadius="lg"

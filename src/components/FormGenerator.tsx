@@ -1,29 +1,29 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { DeepPartial, FormProvider, UnpackNestedValue, useForm } from "react-hook-form";
 import { Button, Container } from "@chakra-ui/react";
 import FormFieldsGenerator from "./FormFieldsGenerator";
 import React, { ReactElement, useEffect } from "react";
 
-type FormGeneratorProps = {
+type FormGeneratorProps<T> = {
   formData: Record<string, any>;
-  defaults: Record<string, any>;
+  initialData: UnpackNestedValue<DeepPartial<T>>;
   onSubmit: (data) => void;
 };
 
 /**
  * Renders a dynamic created form
  * @param {Record<string, any>} formData
- * @param {Record<string, any>} defaults
+ * @param {T} initialData
  * @return {ReactElement}
  */
-export default function FormGenerator({
+export default function FormGenerator<T>({
   formData,
-  defaults,
+  initialData,
   onSubmit,
-}: FormGeneratorProps): ReactElement {
-  const methods = useForm();
+}: FormGeneratorProps<T>): ReactElement {
+  const methods = useForm<T>();
   // Reset form values with default values
   useEffect(() => {
-    methods.reset(defaults);
+    methods.reset(initialData);
   }, []);
 
   return (

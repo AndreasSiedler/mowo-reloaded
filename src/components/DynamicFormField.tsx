@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 import ImageDropzone from "./ImageDropzone";
+import { ImageInput } from "../API";
 
 type SelectOption = {
   label: string;
@@ -39,6 +40,7 @@ export default function DynamicFormField({
 }: DynamicFormFieldProps): ReactElement {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
@@ -82,7 +84,12 @@ export default function DynamicFormField({
           <FormLabel id={name} htmlFor={name}>
             {label}
           </FormLabel>
-          <ImageDropzone />
+          <ImageDropzone
+            {...register(name, validation)}
+            onChange={(files: ImageInput[]) => {
+              setValue(name, files);
+            }}
+          />
           <FormErrorMessage>{errors[name] && errors[name].message}</FormErrorMessage>
         </FormControl>
       )}

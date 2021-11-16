@@ -2,7 +2,10 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-
+export declare class Image {
+  readonly key?: string;
+  constructor(init: ModelInit<Image>);
+}
 
 type SpaceMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -17,6 +20,7 @@ export declare class Space {
   readonly title?: string;
   readonly city?: City;
   readonly owner?: string;
+  readonly images?: (Image | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Space, SpaceMetaData>);

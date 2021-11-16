@@ -12,10 +12,11 @@ import {
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/react";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { Space } from "../API";
+import Storage from "@aws-amplify/storage";
 
 const data = {
   id: "123",
@@ -66,7 +67,24 @@ function Rating({ rating, numReviews }: RatingProps) {
  * @param {Product} props
  * @return {ReactElement}
  */
-function ProductCard({ id, title, _deleted }: Space): ReactElement {
+function ProductCard({ id, title, images, _deleted }: Space): ReactElement {
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function getImageUrl(key: string): Promise<string> {
+      // get the signed URL string
+      const signedURL = await Storage.get(key); // get key from Storage.list
+      return signedURL;
+    }
+
+    async function loadImages() {
+      const imageUrls = await Promise.all(images.map(async (img) => getImageUrl(img.key)));
+      setImageUrls(imageUrls);
+    }
+
+    loadImages();
+  }, []);
+
   return (
     <LinkBox>
       <Flex p={5} w="full" alignItems="center" justifyContent="center">
@@ -80,7 +98,7 @@ function ProductCard({ id, title, _deleted }: Space): ReactElement {
         >
           {data.isNew && <Circle size="10px" position="absolute" top={2} right={2} bg="red.200" />}
 
-          <Image src={data.imageURL} alt={`Picture of ${data.name}`} roundedTop="lg" />
+          <Image src={imageUrls[0]} alt={`Picture of ${data.name}`} roundedTop="lg" />
 
           <Box p="6">
             <Box d="flex" alignItems="baseline">

@@ -10,6 +10,13 @@ interface Props {
   onUpload: (file: File, key: string) => void;
 }
 
+/**
+ * Renders a file upload element with progressbar and a fileheader
+ * @param {File} file
+ * @param {Function} onDelete
+ * @param {Function} onUpload
+ * @return {ReactElement}
+ */
 export default function SingleFileUploadWithProgress({
   file,
   onDelete,

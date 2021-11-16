@@ -57,8 +57,7 @@
           {
             "label": "Images",
             "name": "images",
-            "type": "dropzone",
-            "placeholder": "Select one option"
+            "type": "dropzone"
           },
           {
             "label": "Themen",

@@ -54,6 +54,7 @@ export default function Spaces(): ReactElement {
       const input: UpdateSpaceInput = {
         id: data.id,
         title: data.title,
+        images: data.images,
         _version: data._version,
       };
 
@@ -117,7 +118,7 @@ export default function Spaces(): ReactElement {
         </Center>
       )}
       {data && (
-        <FormGenerator formData={ProductFormFields[0]} defaults={data} onSubmit={handleSubmit} />
+        <FormGenerator formData={ProductFormFields[0]} initialData={data} onSubmit={handleSubmit} />
       )}
     </SidebarWithHeader>
   );
