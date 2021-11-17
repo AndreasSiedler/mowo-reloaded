@@ -15,7 +15,7 @@ import {
   ListSpacesQueryVariables,
   ModelSpaceFilterInput,
 } from "../../../API";
-import ActionBar from "../../../components/ActionBar";
+import ActionBar from "../../../components/SidebarWithHeader/ActionBar";
 import ErrorMessage from "../../../components/ErrorMessage";
 import SpaceCard from "../../../components/SpaceCard";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";

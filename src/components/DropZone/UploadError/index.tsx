@@ -1,7 +1,7 @@
 import { Box, Progress, Text } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 import { FileError } from "react-dropzone";
-import FileHeader from "./FileHeader";
+import FileHeader from "../FileHeader";
 
 interface UploadErrorProps {
   file: File;

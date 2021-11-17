@@ -8,8 +8,8 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
-import ImageDropzone from "./ImageDropzone";
-import { Image, ImageInput } from "../API";
+import ImageDropzone from "../DropZone";
+import { Image, ImageInput } from "../../API";
 
 type SelectOption = {
   label: string;

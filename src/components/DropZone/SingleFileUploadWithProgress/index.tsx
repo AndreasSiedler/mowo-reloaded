@@ -2,7 +2,23 @@ import Storage from "@aws-amplify/storage";
 import { Box } from "@chakra-ui/layout";
 import { Progress } from "@chakra-ui/react";
 import React, { ReactElement, useEffect, useState } from "react";
-import FileHeader from "./FileHeader";
+import FileHeader from "../FileHeader";
+
+async function uploadFile(file: File, onProgress: (percentage: number) => void) {
+  try {
+    const result = await Storage.put(file.name, file, {
+      contentType: "image/png", // contentType is optional
+      progressCallback(progress) {
+        console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+        const percentage = (progress.loaded / progress.total) * 100;
+        onProgress(Math.round(percentage));
+      },
+    });
+    return result.key;
+  } catch (error) {
+    console.log("Error uploading file: ", error);
+  }
+}
 
 interface Props {
   file: File;
@@ -39,20 +55,4 @@ export default function SingleFileUploadWithProgress({
       <Progress value={progress} />
     </Box>
   );
-}
-
-async function uploadFile(file: File, onProgress: (percentage: number) => void) {
-  try {
-    const result = await Storage.put(file.name, file, {
-      contentType: "image/png", // contentType is optional
-      progressCallback(progress) {
-        console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-        const percentage = (progress.loaded / progress.total) * 100;
-        onProgress(Math.round(percentage));
-      },
-    });
-    return result.key;
-  } catch (error) {
-    console.log("Error uploading file: ", error);
-  }
 }

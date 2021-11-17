@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
-import { Space } from "../API";
+import { Space } from "../../API";
 import Storage from "@aws-amplify/storage";
 import Rating from "./Rating";
 

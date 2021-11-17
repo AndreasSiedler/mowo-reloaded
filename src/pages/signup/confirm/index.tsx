@@ -17,7 +17,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Auth } from "aws-amplify";
-import { useUser } from "../context/AuthContext";
+import { useUser } from "../../../context/AuthContext";
 import { CognitoUser } from "@aws-amplify/auth";
 import { useRouter } from "next/router";
 
@@ -89,12 +89,7 @@ export default function ConfirmSignup() {
             <Link color={"blue.400"}>features</Link> ✌️
           </Text>
         </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
+        <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <Stack spacing={4}>
               <FormControl isInvalid={Boolean(errors.code)} isRequired>
@@ -109,16 +104,9 @@ export default function ConfirmSignup() {
                     required: "This is required",
                   })}
                 />
-                <FormErrorMessage>
-                  {errors.code && errors.code.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.code && errors.code.message}</FormErrorMessage>
               </FormControl>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={isSubmitting}
-                type="submit"
-              >
+              <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
                 Confirm
               </Button>
             </Stack>

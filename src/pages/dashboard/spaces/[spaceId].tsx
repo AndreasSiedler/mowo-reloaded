@@ -17,9 +17,9 @@ import {
   UpdateSpaceInput,
   UpdateSpaceMutation,
 } from "../../../API";
-import ActionBar from "../../../components/ActionBar";
+import ActionBar from "../../../components/SidebarWithHeader/ActionBar";
 import ErrorMessage from "../../../components/ErrorMessage";
-import FormGenerator from "../../../components/FormGenerator";
+import FormGenerator from "../../../components/FormGnerator";
 import SidebarWithHeader from "../../../components/SidebarWithHeader";
 import { toastErrorConfig, toastSuccessConfig } from "../../../config/constants";
 import ProductFormFields from "../../../config/spaces_form_fields.json";

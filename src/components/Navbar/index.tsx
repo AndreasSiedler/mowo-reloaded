@@ -25,8 +25,8 @@ import {
   ChevronRightIcon,
   HamburgerIcon,
 } from "@chakra-ui/icons";
-import { useUser } from "../context/AuthContext";
-import ProfileButton from "./ProfileButton";
+import { useUser } from "../../context/AuthContext";
+import ProfileButton from "../AvatarDropdownButton";
 
 export default function Navbar() {
   const { user } = useUser();

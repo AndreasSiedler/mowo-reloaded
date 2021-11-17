@@ -4,7 +4,7 @@ import { FileError, FileRejection, useDropzone } from "react-dropzone";
 import { Center, Icon, StackDivider } from "@chakra-ui/react";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
 import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
-import { Image, ImageInput } from "../API";
+import { Image, ImageInput } from "../../API";
 import UploadError from "./UploadError";
 import Storage from "@aws-amplify/storage";
 
@@ -44,26 +44,21 @@ export default function ImageDropzone({
 }: ImageDropzoneProps): ReactElement {
   const [files, setFiles] = useState<UploadableFile[]>([]);
 
-  const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
-    const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
-    setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
-  }, []);
-
   // Set initial values
-  useEffect(() => {
-    async function loadImages() {
-      const images = await Promise.all<UploadableFile>(
-        initialValues.map((img) => mapImageInputToUploadableImage(img))
-      );
-      setFiles((curr) => [...curr, ...images]);
-    }
+  // useEffect(() => {
+  //   async function loadImages() {
+  //     const images = await Promise.all<UploadableFile>(
+  //       initialValues.map((img) => mapImageInputToUploadableImage(img))
+  //     );
+  //     setFiles((curr) => [...curr, ...images]);
+  //   }
 
-    if (initialValues) {
-      loadImages();
-    }
-  }, [initialValues]);
+  //   if (initialValues) {
+  //     loadImages();
+  //   }
+  // }, [initialValues]);
 
-  // Run onChange if files changes
+  // Run callback onChange if files changes
   useEffect(() => {
     onChange(files.map((fw) => ({ key: fw.key })));
   }, [files]);
@@ -82,6 +77,11 @@ export default function ImageDropzone({
       })
     );
   }
+
+  const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
+    const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
+    setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: ["image/*"],
@@ -122,7 +122,6 @@ export default function ImageDropzone({
           </>
         ))}
       </VStack>
-      {JSON.stringify(files)}
     </>
   );
 }

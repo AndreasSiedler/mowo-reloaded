@@ -18,7 +18,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Auth } from "aws-amplify";
-import { toastPosition } from "../config/constants";
+import { toastPosition } from "../../config/constants";
 
 type IFormInput = {
   email: string;
@@ -88,12 +88,7 @@ export default function Login() {
             to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
           </Text>
         </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
+        <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <Stack spacing={4}>
               <FormControl isInvalid={Boolean(errors.email)} isRequired>
@@ -112,9 +107,7 @@ export default function Login() {
                     },
                   })}
                 />
-                <FormErrorMessage>
-                  {errors.email && errors.email.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={Boolean(errors.password)} isRequired>
                 <FormLabel id="password" htmlFor="password">
@@ -132,16 +125,9 @@ export default function Login() {
                     },
                   })}
                 />
-                <FormErrorMessage>
-                  {errors.password && errors.password.message}
-                </FormErrorMessage>
+                <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
               </FormControl>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={isSubmitting}
-                type="submit"
-              >
+              <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
                 Submit
               </Button>
             </Stack>

@@ -1,7 +1,9 @@
 import { DeepPartial, FormProvider, UnpackNestedValue, useForm } from "react-hook-form";
 import { Button, Container } from "@chakra-ui/react";
 import FormFieldsGenerator from "./FormFieldsGenerator";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useCallback, useEffect } from "react";
+import debounce from "lodash/debounce";
+import { Space } from "../../API";
 
 type FormGeneratorProps<T> = {
   formData: Record<string, any>;
@@ -13,6 +15,7 @@ type FormGeneratorProps<T> = {
  * Renders a dynamic created form
  * @param {Record<string, any>} formData
  * @param {T} initialData
+ * @param {function} onSubmit
  * @return {ReactElement}
  */
 export default function FormGenerator<T>({
@@ -25,6 +28,21 @@ export default function FormGenerator<T>({
   useEffect(() => {
     methods.reset(initialData);
   }, []);
+
+  const debounceSubmit = useCallback(
+    debounce((data: Space) => {
+      onSubmit(data);
+    }, 1000),
+    []
+  );
+
+  useEffect(() => {
+    methods.watch((value, { name, type }) => {
+      if (type === "change") {
+        debounceSubmit(value as Space);
+      }
+    });
+  }, [methods.watch]);
 
   return (
     <Container maxW="container.xl">

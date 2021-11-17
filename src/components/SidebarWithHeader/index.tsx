@@ -30,8 +30,8 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
-import ProfileButton from "./ProfileButton";
-import { useUser } from "../context/AuthContext";
+import ProfileButton from "../AvatarDropdownButton";
+import { useUser } from "../../context/AuthContext";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 interface LinkItemProps {
