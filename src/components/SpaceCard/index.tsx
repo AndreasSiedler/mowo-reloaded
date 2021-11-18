@@ -34,7 +34,7 @@ const data = {
  * @param {Product} props
  * @return {ReactElement}
  */
-export default function SpaceCard({ id, title, images, _deleted }: Space): ReactElement {
+export default function SpaceCard({ id, title, images = [], _deleted }: Space): ReactElement {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   useEffect(() => {

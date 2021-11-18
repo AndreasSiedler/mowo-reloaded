@@ -76,8 +76,8 @@ export default function SwiperGallery({ data }: SwiperGalleryProps): ReactElemen
       <Swiper
         {...params}
         onInit={(swiper) => {
-          swiper.params.navigation.prevEl = navigationPrevRef.current;
-          swiper.params.navigation.nextEl = navigationNextRef.current;
+          // swiper.params.navigation.prevEl = navigationPrevRef.current;
+          // swiper.params.navigation.nextEl = navigationNextRef.current;
           swiper.navigation.init();
           swiper.navigation.update();
         }}
