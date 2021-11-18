@@ -1,12 +1,12 @@
 import React from "react";
 import { Grid, Box, Stack, Heading, useColorModeValue, GridItem } from "@chakra-ui/react";
-import DynamicFormField from "./DynamicFormField";
+import DynamicFormField from "../DynamicFormField";
 
-type FormFieldsGeneratorProps = {
+type DynamicFormFieldStackProps = {
   data: any;
 };
 
-export default function FormFieldsGenerator(props: FormFieldsGeneratorProps) {
+export default function DynamicFormFieldStack(props: DynamicFormFieldStackProps) {
   const { data } = props;
 
   return (

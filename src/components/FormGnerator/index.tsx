@@ -1,6 +1,6 @@
 import { DeepPartial, FormProvider, UnpackNestedValue, useForm } from "react-hook-form";
 import { Button, Container } from "@chakra-ui/react";
-import FormFieldsGenerator from "./FormFieldsGenerator";
+import DynamicFormFieldStack from "./DynamicFormFieldStack";
 import React, { ReactElement, useCallback, useEffect } from "react";
 import debounce from "lodash/debounce";
 import { Space } from "../../API";
@@ -38,9 +38,8 @@ export default function FormGenerator<T>({
 
   useEffect(() => {
     methods.watch((value, { name, type }) => {
-      if (type === "change") {
-        debounceSubmit(value as Space);
-      }
+      console.log(value, type);
+      debounceSubmit(value as Space);
     });
   }, [methods.watch]);
 
@@ -48,7 +47,7 @@ export default function FormGenerator<T>({
     <Container maxW="container.xl">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} noValidate>
-          <FormFieldsGenerator data={formData} />
+          <DynamicFormFieldStack data={formData} />
           <Button type="submit">Speichern</Button>
         </form>
         <pre>{JSON.stringify(methods.getValues(), null, 2)}</pre>

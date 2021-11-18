@@ -3,25 +3,10 @@ import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { FileError, FileRejection, useDropzone } from "react-dropzone";
 import { Center, Icon, StackDivider } from "@chakra-ui/react";
 import { BsFillCloudArrowUpFill } from "react-icons/bs";
-import SingleFileUploadWithProgress from "./SingleFileUploadWithProgress";
+import SingleFileUploadWithProgress from "./FileHeaderWithProgress";
 import { Image, ImageInput } from "../../API";
 import UploadError from "./UploadError";
 import Storage from "@aws-amplify/storage";
-
-/**
- * Maps an server Image object to an UploadableFile, which is needed by the Dropzone component.
- * @param {Image} img
- * @return {UploadableFile}
- */
-async function mapImageInputToUploadableImage(img: Image): Promise<UploadableFile> {
-  const result = await Storage.get(img.key, { download: true });
-  const uplFile: UploadableFile = {
-    file: new File([result.Body as Blob], "name"),
-    key: img.key,
-    errors: [],
-  };
-  return uplFile;
-}
 
 export interface UploadableFile {
   file: File;
@@ -30,7 +15,7 @@ export interface UploadableFile {
 }
 
 export interface ImageDropzoneProps {
-  initialValues?: Image[];
+  initFiles?: Image[];
   onChange: (files: ImageInput[]) => void;
 }
 
@@ -38,25 +23,30 @@ export interface ImageDropzoneProps {
  * Renders a image drop zone with image previews
  * @return {ReactElement}
  */
-export default function ImageDropzone({
-  initialValues,
-  onChange,
-}: ImageDropzoneProps): ReactElement {
+export default function ImageDropzone({ initFiles, onChange }: ImageDropzoneProps): ReactElement {
   const [files, setFiles] = useState<UploadableFile[]>([]);
 
   // Set initial values
-  // useEffect(() => {
-  //   async function loadImages() {
-  //     const images = await Promise.all<UploadableFile>(
-  //       initialValues.map((img) => mapImageInputToUploadableImage(img))
-  //     );
-  //     setFiles((curr) => [...curr, ...images]);
-  //   }
+  useEffect(() => {
+    if (!initFiles) return;
+    async function loadImages() {
+      const mappedAndFilteredInitFiles = await Promise.all<UploadableFile>(
+        initFiles
+          .filter((initFile) => files.some((file) => file.key !== initFile.key))
+          .map((initFile) => getUploadableFileFromKey(initFile.key))
+      );
+      setFiles((currFiles) => [...currFiles, ...mappedAndFilteredInitFiles]);
+    }
 
-  //   if (initialValues) {
-  //     loadImages();
-  //   }
-  // }, [initialValues]);
+    loadImages();
+  }, [initFiles]);
+
+  async function getUploadableFileFromKey(key: string): Promise<UploadableFile> {
+    // get the signed URL string
+    const result = await Storage.get(key, { download: true }); // get key from Storage.list
+    const file = new File([result.Body as Blob], key);
+    return { file: file, errors: [], key: key };
+  }
 
   // Run callback onChange if files changes
   useEffect(() => {
@@ -114,6 +104,7 @@ export default function ImageDropzone({
             ) : (
               <SingleFileUploadWithProgress
                 key={idx}
+                storageKey={fw.key}
                 file={fw.file}
                 onDelete={onDelete}
                 onUpload={onUpload}
@@ -125,3 +116,18 @@ export default function ImageDropzone({
     </>
   );
 }
+
+/**
+ * Maps an server Image object to an UploadableFile, which is needed by the Dropzone component.
+ * @param {Image} img
+ * @return {UploadableFile}
+ */
+// async function mapImageInputToUploadableImage(img: Image): Promise<UploadableFile> {
+//   const result = await Storage.get(img.key, { download: true });
+//   const uplFile: UploadableFile = {
+//     file: new File([result.Body as Blob], "name"),
+//     key: img.key,
+//     errors: [],
+//   };
+//   return uplFile;
+// }

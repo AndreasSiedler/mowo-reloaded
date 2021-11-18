@@ -8,8 +8,8 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
-import ImageDropzone from "../DropZone";
-import { Image, ImageInput } from "../../API";
+import ImageDropzone from "../../DropZone";
+import { Image, ImageInput } from "../../../API";
 
 type SelectOption = {
   label: string;
@@ -87,7 +87,7 @@ export default function DynamicFormField({
           </FormLabel>
           <ImageDropzone
             {...register(name, validation)}
-            initialValues={getValues(name) as Image[]}
+            initFiles={getValues(name) as Image[]}
             onChange={(files: ImageInput[]) => {
               setValue(name, files);
             }}
